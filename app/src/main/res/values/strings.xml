@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">TvHelper</string>
+
+    <string name="simple_view_behavior">com.lzy.demo.ui.SimpleViewBehavior</string>
+    <string name="translate_up_down_behavior">com.lzy.demo.ui.TranslateUpDownBehavior</string>
+
+    <!-- service -->
+    <string name="network_noconnection">当前未连接网络</string>
+    <string name="network_connection">当前已连接网络</string>
+    <string name="delete_all">删除所有</string>
+    <string name="stop_all">暂停所有</string>
+    <string name="start_all">开始所有</string>
+    <string name="title">标题</string>
+    <string name="progress">--M/--M</string>
+    <string name="speed">--%</string>
+    <string name="speeds">---K/s</string>
+    <string name="download">下载</string>
+    <string name="delete">删除</string>
+    <string name="redownload">重新下载</string>
+    <string name="download_all">全部下载</string>
+    <string name="enter_downlaod">进入下载界面</string>
+    <string name="enter_test">进入测试界面</string>
+    <string name="download_path">下载路径文件夹:</string>
+    <string name="start_download">开始下载</string>
+    <string name="service">service</string>
+    <string name="downloads">download</string>
+    <string name="testdownload">testDownload</string>
+    <string name="appname">appName</string>
+    <string name="vername">verName</string>
+    <string name="description">description</string>
+    <string name="type">安装类型：</string>
+    <string name="app_names">应用名字</string>
+    <string name="priority">priority</string>
+    <string name="test">test</string>
+    <string name="dialog_content">内容</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_sure">确定</string>
+    <!--add-->
+    <drawable name="normal">#ff6501</drawable>
+    <drawable name="pressed">#a44100</drawable>
+</resources>
