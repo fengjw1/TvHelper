@@ -45,13 +45,14 @@ public class StopRunningActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_stop_running);
         try {
             init();
         }catch (Exception e){
             e.printStackTrace();
         }
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stop_running);
         mView = (ListView) findViewById(R.id.mlist);
         mAdapter = new AppAdapter(this, mAppInfoList);
         mView.setAdapter(mAdapter);
@@ -84,6 +85,17 @@ public class StopRunningActivity extends AppCompatActivity {
         mAdapter.notifyDataSetChanged();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     private void init(){
         try {
             mAppsInfo = new AppsInfo(this);
@@ -91,6 +103,7 @@ public class StopRunningActivity extends AppCompatActivity {
             Log.d(TGA, "Enter mAppInfo");
             mAppsInfo.init();
             mList = mAppsInfo.rebuildRunning();
+
             Log.d(TGA, "mList Size is " + mList.size());
             for (ApplicationsState.AppEntry appEntry : mList){
                 try {

@@ -30,12 +30,12 @@ public class AppsInfo {
         mSessionRunning = mApplicationsState.newSession(new RowUpdateCallbacks() {
             @Override
             protected void doRebuild() {
-
+                Log.d(TGA, "doRebuild");
             }
 
             @Override
             public void onRebuildComplete(ArrayList<ApplicationsState.AppEntry> arrayList) {
-
+                Log.d(TGA, "onRebuildComplete");
             }
         });
         Log.d(TGA, "mSessionRunning");
