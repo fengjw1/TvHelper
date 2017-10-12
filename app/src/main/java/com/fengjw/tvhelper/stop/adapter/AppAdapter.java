@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class AppAdapter extends BaseAdapter{
             mHolder.size = (TextView) view.findViewById(R.id.size_app);
             mHolder.cachesize = (TextView) view.findViewById(R.id.cachesize_app);
             mHolder.mLayout = (LinearLayout) view.findViewById(R.id.linear_app);
+            mHolder.mButton = (Button) view.findViewById(R.id.btn_stoprun);
             view.setTag(mHolder);
         }else {
             mHolder = (ViewHolder) view.getTag();
@@ -69,6 +71,7 @@ public class AppAdapter extends BaseAdapter{
         mHolder.name.setText(appInfo.getName());
         mHolder.size.setText(appInfo.getSize());
         mHolder.cachesize.setText(appInfo.getCacheSize());
+        mHolder.mButton.setVisibility(View.GONE);
 
         Log.d(TGA, "OnClickListener!");
         return view;
@@ -81,6 +84,7 @@ public class AppAdapter extends BaseAdapter{
         TextView name;
         TextView size;
         TextView cachesize;
+        Button mButton;
         LinearLayout mLayout;
     }
 

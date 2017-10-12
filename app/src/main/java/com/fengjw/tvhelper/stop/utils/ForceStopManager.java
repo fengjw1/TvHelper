@@ -27,6 +27,7 @@ public class ForceStopManager {
         mContext = context;
         mAppInfo = appInfo;
         mShowForceStop = false;
+        Log.d(TGA, "ForceStopManager");
     }
 
     public boolean canForceStop() {
@@ -71,5 +72,6 @@ public class ForceStopManager {
                 }
             }, null, Activity.RESULT_CANCELED, null, null);
         }
+        Log.d(TGA, "mShowForceStop = " + mShowForceStop);
     }
 }

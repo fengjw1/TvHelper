@@ -35,6 +35,7 @@
     <string name="dialog_content">内容</string>
     <string name="dialog_cancel">取消</string>
     <string name="dialog_sure">确定</string>
+    <string name="stoprun">停止运行</string>
     <!--add-->
     <drawable name="normal">#ff6501</drawable>
     <drawable name="pressed">#a44100</drawable>

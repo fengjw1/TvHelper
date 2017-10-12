@@ -54,12 +54,16 @@
             android:exported="true">
         </service>
 
-        <activity android:name=".stop.StopRunningActivity"
-                  android:launchMode="singleInstance">
+        <activity
+            android:name=".stop.StopRunningActivity"
+            android:launchMode="singleInstance">
         </activity>
-        <activity android:name=".stop.DetailActivity"
-                  android:launchMode="singleInstance"
-                  android:theme="@style/AppTheme.Dialog"/>
+        <activity
+            android:name=".stop.DetailActivity"
+            android:launchMode="singleInstance"
+            android:theme="@style/AppTheme.Dialog"/>
+        <activity android:name=".stop.StopRunActivity">
+        </activity>
     </application>
 
 </manifest>

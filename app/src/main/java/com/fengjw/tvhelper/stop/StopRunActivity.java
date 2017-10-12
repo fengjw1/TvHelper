@@ -1,80 +1,59 @@
-package com.fengjw.tvhelper;
+package com.fengjw.tvhelper.stop;
 
-import android.content.Intent;
+import android.app.Application;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 
 import com.android.settingslib.applications.ApplicationsState;
-import com.fengjw.tvhelper.stop.StopRunActivity;
-import com.fengjw.tvhelper.stop.StopRunningActivity;
+import com.fengjw.tvhelper.R;
+import com.fengjw.tvhelper.stop.adapter.AppsAdapter;
 import com.fengjw.tvhelper.stop.utils.AppsInfo;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
-import com.fengjw.tvhelper.update.DownloadAllActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
 
+public class StopRunActivity extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    private Button btn_update;
-    private Button btn_stoprunning;
-    private Button btn_stoprun;
-
-    /*
-    这里是预加载一次
-     */
+    private RecyclerView mView;
+    private AppsAdapter mAdapter;
     private AppsInfo mAppsInfo;
-    private List<StopAppInfo> mAppInfoList;
     private List<ApplicationsState.AppEntry> mList;
+    private List<StopAppInfo> mAppInfoList;
+    public final static String TGA = "MainActivity";
+    private StaggeredGridLayoutManager mLayoutManager;
+    private int columNum = 3;
+    private Application mApplication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_stop_run);
         try {
-            /*
-            如果这里不执行一次，那么后面的activity无法直接获取完整的列表，具体不清楚原因。
-             */
             init();
+            mApplication = getApplication();
+            mAdapter = new AppsAdapter(this, mAppInfoList, mApplication);
+            mView = (RecyclerView) findViewById(R.id.apps_recyclerview);
+            mView.requestFocus();
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+//            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            //mLayoutManager = new GridLayoutManager(this, columNum);
+            //mLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+            mView.setLayoutManager(mLayoutManager);
+            //mView.setHasFixedSize(true);
+            mView.setAdapter(mAdapter);
+            
         }catch (Exception e){
             e.printStackTrace();
         }
-
-        btn_update = (Button) findViewById(R.id.btn_update);
-        btn_update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DownloadAllActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btn_stoprunning = (Button) findViewById(R.id.btn_stoprunning);
-        btn_stoprunning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, StopRunningActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btn_stoprun = (Button) findViewById(R.id.btn_stoprunn);
-        btn_stoprun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, StopRunActivity.class);
-                startActivity(intent);
-            }
-        });
     }
-
 
     private void init(){
         try {
@@ -105,4 +84,5 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
 }

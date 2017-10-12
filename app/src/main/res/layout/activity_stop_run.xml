@@ -5,10 +5,9 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-
-    <ListView
-        android:id="@+id/mlist"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/apps_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </ListView>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_listview"/>
 </LinearLayout>

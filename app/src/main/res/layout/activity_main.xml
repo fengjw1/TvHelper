@@ -28,4 +28,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/btn_update"
         android:text="stoprunning"/>
+    <Button
+        android:id="@+id/btn_stoprunn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/btn_stoprunning"
+        android:textAllCaps="false"
+        android:text="stoprun"/>
 </android.support.constraint.ConstraintLayout>

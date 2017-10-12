@@ -105,9 +105,12 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         mPackageName = uri.getSchemeSpecificPart();
+        Log.d(TGA, "mPackageName = " + mPackageName);
         mApplicationsState = ApplicationsState.getInstance(getApplication());
+        Log.d(TGA, "mApplicationsState = " + mApplicationsState);
         //mSession = mApplicationsState.newSession(this);
         final int userId = UserHandle.myUserId();
+        Log.d(TGA, "userId = " + userId);
         final ApplicationsState.AppEntry entry = mApplicationsState.getEntry(mPackageName, userId);
         //根据包名和userId来取出app信息
         if (entry == null) {
