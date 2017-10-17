@@ -1,11 +1,14 @@
 package com.fengjw.tvhelper;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.stop.StopRunActivity;
@@ -14,17 +17,17 @@ import com.fengjw.tvhelper.stop.utils.AppsInfo;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 import com.fengjw.tvhelper.update.DownloadAllActivity;
 
+import org.evilbinary.tv.widget.BorderView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity implements View.OnClickListener {
 
-    private Button btn_update;
-    private Button btn_stoprunning;
-    private Button btn_stoprun;
+    private RelativeLayout mLayout;
 
     /*
     这里是预加载一次
@@ -36,43 +39,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_new);
 
         try {
             /*
             如果这里不执行一次，那么后面的activity无法直接获取完整的列表，具体不清楚原因。
              */
             init();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        btn_update = (Button) findViewById(R.id.btn_update);
-        btn_update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, DownloadAllActivity.class);
-                startActivity(intent);
-            }
-        });
+        BorderView border = new BorderView(this);
+        border.setBackgroundResource(R.drawable.border_highlight);
+        mLayout  = (RelativeLayout) findViewById(R.id.main);
+        border.attachTo(mLayout);
 
-        btn_stoprunning = (Button) findViewById(R.id.btn_stoprunning);
-        btn_stoprunning.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, StopRunningActivity.class);
-                startActivity(intent);
-            }
-        });
+        for (int i = 0; i < mLayout.getChildCount(); i ++){
+            mLayout.getChildAt(i).setOnClickListener(this);
+        }
 
-        btn_stoprun = (Button) findViewById(R.id.btn_stoprunn);
-        btn_stoprun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, StopRunActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
 
@@ -103,6 +89,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent();
+        if (view == mLayout.getChildAt(0)){
+            intent.setClass(this, DownloadAllActivity.class);
+            startActivity(intent);
+        }else if (view == mLayout.getChildAt(1)){
+            intent.setClass(this, StopRunActivity.class);
+            startActivity(intent);
         }
     }
 }

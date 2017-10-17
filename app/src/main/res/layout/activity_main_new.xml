@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:focusable="false"
+    tools:context=".MainActivity">
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:focusable="false">
+
+        <RelativeLayout
+            android:id="@+id/main"
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:layout_gravity="center"
+            android:clipToPadding="false"
+            android:focusable="false"
+            android:gravity="center"
+            android:paddingStart="20dp">
+
+            <TextView
+                android:id="@+id/tv_update"
+                android:layout_width="290dp"
+                android:layout_height="446dp"
+                android:layout_margin="16dp"
+                android:background="@drawable/shape"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:text="@string/tv_update"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/tv_stoprun"
+                android:layout_width="290dp"
+                android:layout_height="446dp"
+                android:layout_margin="16dp"
+                android:layout_toRightOf="@+id/tv_update"
+                android:background="@color/coral"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:gravity="center"
+                android:text="@string/tv_stoprun"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
+        </RelativeLayout>
+
+    </HorizontalScrollView>
+
+</LinearLayout>
