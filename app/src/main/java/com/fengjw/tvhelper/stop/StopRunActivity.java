@@ -64,14 +64,11 @@ public class StopRunActivity extends AppCompatActivity {
             //mView.setHasFixedSize(true);
             border.attachTo(mView);
             mView.setFocusable(false);
-
-
+            mView.setAdapter(mAdapter);
             DefaultItemAnimator animator = new DefaultItemAnimator();
             animator.setAddDuration(1000);
             animator.setRemoveDuration(1000);
             mView.setItemAnimator(animator);
-
-            mView.setAdapter(mAdapter);
             mView.scrollToPosition(0);
             
         }catch (Exception e){

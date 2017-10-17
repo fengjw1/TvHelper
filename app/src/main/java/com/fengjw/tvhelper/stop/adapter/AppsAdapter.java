@@ -80,7 +80,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
                 try {
                     mAppInfo = mList.get(position);//这里是获取当前要清除的Apk信息
                     //因为在onBindViewHolder中会加载很多的apk信息，但是每次删除一个
-                    Toast.makeText(mContext, "click name = " + mAppInfo.getName(),
+                    Toast.makeText(mContext, "删除 " + mAppInfo.getName(),
                             Toast.LENGTH_SHORT).show();
                     mForceStopManager = new ForceStopManager(mContext, mAppInfo);
                     if (mForceStopManager.canForceStop()){
@@ -119,8 +119,10 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
     private void removeData(int position){
         mList.remove(position);
         //notifyDataSetChanged();
-        //notifyItemRemoved(position);
-        notifyItemRangeRemoved(position, mList.size() - position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, mList.size() - position);
+        //notifyItemRangeRemoved(position, mList.size() - position); //使用这个方法会导致 在多组数据的情况下错位。所以使用上面的两个要好很多
+
     }
 
     @Override

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/linear_app"
               android:orientation="vertical"
+              android:background="@drawable/home_bg"
               android:gravity="center"
               android:focusable="true"
               android:focusableInTouchMode="true"
@@ -14,6 +15,7 @@
 
     <ImageView
         android:id="@+id/image_app"
+        android:layout_marginTop="8dp"
         android:layout_width="120dp"
         android:layout_height="120dp"/>
 
