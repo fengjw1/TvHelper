@@ -3,13 +3,16 @@
               android:id="@+id/linear_app"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="80dp">
+              android:layout_height="120dp">
 
 <LinearLayout
     android:orientation="horizontal"
     android:layout_weight="1"
     android:gravity="center"
     android:layout_width="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:layout_margin="20dp"
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/image_app"
@@ -42,6 +45,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
+        android:visibility="gone"
         android:layout_height="wrap_content">
 
         <Button
@@ -49,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button"
-            android:text="@string/stoprun"/>
+            android:text="@string/stoprun"
+            android:visibility="gone"/>
     </LinearLayout>
 </LinearLayout>

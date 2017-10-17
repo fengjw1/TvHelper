@@ -58,7 +58,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mLayoutInflater.inflate(R.layout.item_listview, parent, false);
+        View view = mLayoutInflater.inflate(R.layout.item_listview_new, parent, false);
         Log.d(TGA, "onCreateViewHolder");
         return new ViewHolder(view);
     }
@@ -74,7 +74,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
 
         //holder.btn_stoprun.setText(mAppInfo.getName());
         //holder.btn_stoprun.setFocusable(true);
-        holder.btn_stoprun.setOnClickListener(new View.OnClickListener() {
+        holder.mLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
