@@ -85,11 +85,9 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
                     mForceStopManager = new ForceStopManager(mContext, mAppInfo);
                     if (mForceStopManager.canForceStop()){
                         onForceStopOk();
-                        Log.d(TGA, "getItemId : " + getItemId(position));
-                        Log.d(TGA, "getItemViewType : " + getItemViewType(position));
-                        mList.remove(position);
-                        notifyItemRemoved(position);
-                        notifyDataSetChanged();
+                        //Log.d(TGA, "getItemId : " + getItemId(position));
+                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
+                        removeData(position);
                         Log.d(TGA, "delete");
                     }else {
                         Log.d(TGA, "no delete");
@@ -117,6 +115,13 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
 //                + " Size =" + mAppInfo.getSize()
 //                + " Version =" + mAppInfo.getVersion());
 //    }
+
+    private void removeData(int position){
+        mList.remove(position);
+        //notifyDataSetChanged();
+        //notifyItemRemoved(position);
+        notifyItemRangeRemoved(position, mList.size() - position);
+    }
 
     @Override
     public int getItemCount() {
