@@ -1,12 +1,10 @@
 package com.fengjw.tvhelper.stop;
 
 import android.app.Application;
+import android.app.usage.UsageStatsManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -15,7 +13,6 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.stop.adapter.AppsAdapter;
 import com.fengjw.tvhelper.stop.utils.AppsInfo;
-import com.fengjw.tvhelper.stop.utils.DividerGridItemDecoration;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 
 import org.evilbinary.tv.widget.BorderView;
@@ -23,7 +20,6 @@ import org.evilbinary.tv.widget.BorderView;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
 
 public class StopRunActivity extends AppCompatActivity {
 
@@ -33,10 +29,12 @@ public class StopRunActivity extends AppCompatActivity {
     private List<ApplicationsState.AppEntry> mList;
     private List<StopAppInfo> mAppInfoList;
     public final static String TGA = "MainActivity";
-    //private StaggeredGridLayoutManager mLayoutManager;
-    private GridLayoutManager mLayoutManager;
+    private StaggeredGridLayoutManager mLayoutManager;
+    //private GridLayoutManager mLayoutManager;
     private int columNum = 4;
     private Application mApplication;
+
+    private UsageStatsManager mManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +42,6 @@ public class StopRunActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stop_run);
         try {
             init();
-
             BorderView border = new BorderView(this);
             border.setBackgroundResource(R.drawable.border_highlight);
 
@@ -54,8 +51,8 @@ public class StopRunActivity extends AppCompatActivity {
             //mView.requestFocus();
             //LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
 //            layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-            mLayoutManager = new GridLayoutManager(this, columNum);
-            //mLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+            //mLayoutManager = new GridLayoutManager(this, columNum);
+            mLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
             //mLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
             mView.setLayoutManager(mLayoutManager);
             //添加分割线
@@ -83,7 +80,6 @@ public class StopRunActivity extends AppCompatActivity {
             Log.d(TGA, "Enter mAppInfo");
             mAppsInfo.init();
             mList = mAppsInfo.rebuildRunning();
-
             Log.d(TGA, "mList Size is " + mList.size());
             for (ApplicationsState.AppEntry appEntry : mList){
                 try {
