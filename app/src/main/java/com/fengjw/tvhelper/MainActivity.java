@@ -71,27 +71,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     protected void onResume() {
         super.onResume();
-        try {
-            /*
-            如果这里不执行一次，那么后面的activity无法直接获取完整的列表，具体不清楚原因。
-             */
-            init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            /*
+//            如果这里不执行一次，那么后面的activity无法直接获取完整的列表，具体不清楚原因。
+//             */
+//            init();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        try {
-            /*
-            如果这里不执行一次，那么后面的activity无法直接获取完整的列表，具体不清楚原因。
-             */
-            init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            /*
+//            如果这里不执行一次，那么后面的activity无法直接获取完整的列表，具体不清楚原因。
+//             */
+//            init();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     private void init(){

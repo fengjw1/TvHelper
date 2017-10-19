@@ -92,6 +92,7 @@ public class StopRunActivity extends AppCompatActivity {
             }
             for (StopAppInfo appInfo : mAppInfoList){
                 Log.d(TGA, "appInfo: name =" + appInfo.getName()
+                        + "pkgname = " + appInfo.getPackageName()
                         + " CacheSize =" + appInfo.getCacheSize()
                         + " DateSize =" + appInfo.getDataSize()
                         + " Size =" + appInfo.getSize()

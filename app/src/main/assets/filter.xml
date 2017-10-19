@@ -1,0 +1,62 @@
+<root author="homer" date="2017-10-19">
+    <filter>
+        <name>com.jrm.localmm</name>
+    </filter>
+    <filter>
+        <name>com.android.phone</name>
+    </filter>
+    <filter>
+        <name>com.mstar.miscsetting</name>
+    </filter>
+    <filter>
+        <name>com.mstar.tv.tvplayer.ui</name>
+    </filter>
+    <filter>
+        <name>com.android.email</name>
+    </filter>
+    <filter>
+        <name>com.android.providers.contacts</name>
+    </filter>
+    <filter>
+        <name>com.android.providers.media</name>
+    </filter>
+    <filter>
+        <name>com.ktc.systemmanager</name>
+    </filter>
+</root>
+<!-- name =本地媒体 pkgname = com.jrm.localmm
+      name =电话 pkgname = com.android.phone
+      name =电视杂项设置 pkgname = com.mstar.miscsetting
+      name =电视BUG pkgname = com.mstar.tv.tvplayer.ui
+      name =电子邮件 pkgname = com.android.email
+      name =谷歌拼音输入法pkgname = com.android.inputmethod.pinyin
+      name =联系人存储 pkgname = com.android.providers.contacts
+      name =媒体存储 pkgname = com.android.providers.media
+      name =内存清理 pkgname = com.ktc.systemmanager
+      name =日历 pkgname = com.android.calendar
+      name =日历存储 pkgname = com.android.providers.calendar
+      name =软件包权限帮助程序 pkgname = com.android.defcontainer
+      name =设置 pkgname = com.android.tv.settings
+      name =时钟 pkgname = com.android.deskclock
+      name =图库 pkgname = com.android.gallery3d
+      name =外部存储设备 pkgname = com.android.externalstorage
+      name =文件管理 pkgname = com.ktc.filemanager
+      name =系统界面 pkgname = com.android.systemui
+      name =系统升级 pkgname = android.systemupdate.service
+      name =下载管理程序 pkgname = com.android.providers.downloads
+      name =一体化位置信息 pkgname = com.android.location.fused
+      name =主页 pkgname = com.android.mslauncher
+      name =Android系统 pkgname = android
+      name =com.mstar.电视设置.热键 pkgname = com.mstar.tvsetting
+      name =com.mstar.tv.service pkgname = com.mstar.tv.service
+      name =Exchange服务pkgname = com.android.exchange
+      name =MCast pkgname = com.android.mcast
+      name =MusicFXpkgname = com.android.musicfx
+      name =NewTV极光pkgname = com.ktcp.tvvideo
+      name =One Time Initpkgname = com.android.onetimeinitializer
+      name =Pico TTS pkgname = com.svox.pico
+      name =Pppoe pkgname = com.mstar.android.pppoe
+      name =TV Applications Provider pkgname = com.mstar.android.providers.tv
+      name =TvHelper pkgname = com.fengjw.tvhelper
+      name =XMLAndroid pkgname = com.homer.xml
+     -->
