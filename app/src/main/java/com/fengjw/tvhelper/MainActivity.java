@@ -2,6 +2,7 @@ package com.fengjw.tvhelper;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -16,12 +17,15 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.stop.StopRunActivity;
 import com.fengjw.tvhelper.stop.StopRunningActivity;
 import com.fengjw.tvhelper.stop.utils.AppsInfo;
+import com.fengjw.tvhelper.stop.utils.DomXml;
+import com.fengjw.tvhelper.stop.utils.Filter;
 import com.fengjw.tvhelper.stop.utils.ForceStopManager;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 import com.fengjw.tvhelper.update.DownloadAllActivity;
 
 import org.evilbinary.tv.widget.BorderView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +45,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private AppsInfo mAppsInfo;
     private List<StopAppInfo> mAppInfoList;
     private List<ApplicationsState.AppEntry> mList;
+
+    private String fileName = Environment.getExternalStoragePublicDirectory
+            (Environment.DIRECTORY_DOWNLOADS).getPath() + "/filter.txt";
+    private DomXml mXml;
+    private String str_write;
+    private List<Filter> mFilters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +77,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 
+    private void cinFile(){
+        Log.d(TGA, "str_write : " + str_write);
+        try { //放置到文件中
+            mXml.writeSDFile(fileName, str_write);
+        }catch (IOException e){
+            e.printStackTrace();
+            Log.d(TGA, e.getMessage());
+        }catch (Exception e){
+            e.printStackTrace();
+            Log.d(TGA, e.getMessage());
+        }
+    }
 
     @Override
     protected void onResume() {
@@ -96,7 +118,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private void init(){
         try {
-
+            mXml = new DomXml(this);
+            mFilters = mXml.XMLResolve();
             mApplicationsState = ApplicationsState.getInstance(getApplication());
 
             mAppsInfo = new AppsInfo(this);
@@ -116,12 +139,32 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
             }
             for (StopAppInfo appInfo : mAppInfoList){
-                Log.d(TGA, "appInfo: name =" + appInfo.getName()
-                        + " CacheSize =" + appInfo.getCacheSize()
-                        + " DateSize =" + appInfo.getDataSize()
-                        + " Size =" + appInfo.getSize()
-                        + " Version =" + appInfo.getVersion());
+                str_write += " " + appInfo.getName() + " : " + appInfo.getPackageName() + "\n";
+//                Log.d(TGA, "appInfo: name =" + appInfo.getName()
+//                        + " CacheSize =" + appInfo.getCacheSize()
+//                        + " DateSize =" + appInfo.getDataSize()
+//                        + " Size =" + appInfo.getSize()
+//                        + " Version =" + appInfo.getVersion());
             }
+
+            //xml 过滤
+            for (int i = 0; i < mAppInfoList.size(); i ++) {
+                for (int j = 0; j < mFilters.size(); j ++) {
+                    if (mFilters.get(j).getName().equals(mAppInfoList.get(i).getPackageName())){
+                        mAppInfoList.remove(i);
+                        Log.d(TGA, "remove pkgName : " + mAppInfoList.get(i).getPackageName());
+                    }
+//                    if (mFilters[j].getName().equals(info.getPackageName())){
+//                        mAppInfoList.remove(info);
+//                        Log.d(TGA, "remove : " + info.getPackageName());
+//                    }else {
+//                        Log.d(TGA, "filter name = " + filter.getName() + "  "
+//                                + "info.getPackageName = " + info.getPackageName());
+//                    }
+                }
+            }
+
+            cinFile();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -129,6 +172,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
+        Log.d(TGA, "onKeyDown");
         if (keyCode == KeyEvent.KEYCODE_BACK){
             try {
                 if (mAppInfoList.size() > 0) {

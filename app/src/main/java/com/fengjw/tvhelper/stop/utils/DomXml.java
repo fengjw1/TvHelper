@@ -6,6 +6,9 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import java.util.ArrayList;
@@ -24,6 +27,14 @@ public class DomXml {
     public DomXml(Context context){
         mContext = context;
         mList = new ArrayList<Filter>();
+    }
+
+    public void writeSDFile(String fileName, String write_str) throws IOException{
+        File file = new File(fileName);
+        FileOutputStream fos = new FileOutputStream(file);
+        byte [] bytes = write_str.getBytes();
+        fos.write(bytes);
+        fos.close();
     }
 
     public List<Filter> XMLResolve(){

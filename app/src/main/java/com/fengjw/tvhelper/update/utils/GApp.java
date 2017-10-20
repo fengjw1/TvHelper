@@ -15,8 +15,16 @@
  */
 package com.fengjw.tvhelper.update.utils;
 
+import android.app.Activity;
 import android.app.Application;
+import android.os.Environment;
+import android.util.Log;
 
+import com.android.settingslib.applications.ApplicationsState;
+import com.fengjw.tvhelper.MainActivity;
+import com.fengjw.tvhelper.stop.utils.AppsInfo;
+import com.fengjw.tvhelper.stop.utils.DomXml;
+import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -29,6 +37,8 @@ import com.lzy.okgo.model.HttpParams;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
@@ -37,6 +47,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.OkHttpClient;
+
+import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
 
 /**
  * ================================================
@@ -49,6 +61,16 @@ import okhttp3.OkHttpClient;
  */
 public class GApp extends Application {
 
+    /*
+    这里是预加载一次
+     */
+    private AppsInfo mAppsInfo;
+    private List<StopAppInfo> mAppInfoList;
+    private List<ApplicationsState.AppEntry> mList;
+
+    private ApplicationsState mApplicationsState;
+    private Activity mActivity;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -57,6 +79,40 @@ public class GApp extends Application {
 //        System.setProperty("http.proxyPort", "8888");
 
         initOkGo();
+        init();
+
+    }
+
+    private void init(){
+        try {
+            mApplicationsState = ApplicationsState.getInstance(this);
+            mActivity = new Activity();
+            mAppsInfo = new AppsInfo(mActivity);
+            mAppInfoList = new ArrayList<>();
+            Log.d(TGA, "Enter mAppInfo");
+            mAppsInfo.init();
+            mList = mAppsInfo.rebuildRunning();
+
+            Log.d(TGA, "mList Size is " + mList.size());
+            for (ApplicationsState.AppEntry appEntry : mList){
+                try {
+                    StopAppInfo appInfo = new StopAppInfo(this, appEntry);
+                    mAppInfoList.add(appInfo);
+                }catch (Exception e){
+                    Log.d(TGA, e.getMessage());
+                    e.printStackTrace();
+                }
+            }
+            for (StopAppInfo appInfo : mAppInfoList){
+                Log.d(TGA, "appInfo: name =" + appInfo.getName()
+                        + " CacheSize =" + appInfo.getCacheSize()
+                        + " DateSize =" + appInfo.getDataSize()
+                        + " Size =" + appInfo.getSize()
+                        + " Version =" + appInfo.getVersion());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void initOkGo() {

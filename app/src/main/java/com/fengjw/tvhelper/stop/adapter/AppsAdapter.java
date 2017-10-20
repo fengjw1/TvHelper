@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Environment;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,9 +20,11 @@ import android.widget.Toast;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.R;
+import com.fengjw.tvhelper.stop.utils.DomXml;
 import com.fengjw.tvhelper.stop.utils.ForceStopManager;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 
+import java.io.IOException;
 import java.util.List;
 
 import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
@@ -43,7 +46,6 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
     private StopAppInfo mAppInfo;
     private Application app;
     private String mPackageName;
-
 
     public AppsAdapter(Context context, List<StopAppInfo> list, Application app) {
         super();
@@ -99,6 +101,8 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
         });
         Log.d(TGA, "onBindViewHolder");
     }
+
+
 
 //    private void init(){
 //        mPackageName = mAppInfo.getPackageName();

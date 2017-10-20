@@ -13,12 +13,16 @@ import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.stop.adapter.AppsAdapter;
 import com.fengjw.tvhelper.stop.utils.AppsInfo;
+import com.fengjw.tvhelper.stop.utils.DomXml;
+import com.fengjw.tvhelper.stop.utils.Filter;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 
 import org.evilbinary.tv.widget.BorderView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
 
 
 public class StopRunActivity extends AppCompatActivity {
@@ -33,7 +37,8 @@ public class StopRunActivity extends AppCompatActivity {
     //private GridLayoutManager mLayoutManager;
     private int columNum = 4;
     private Application mApplication;
-
+    private DomXml mXml;
+    private List<Filter> mFilters;
     private UsageStatsManager mManager;
 
     @Override
@@ -73,8 +78,16 @@ public class StopRunActivity extends AppCompatActivity {
         }
     }
 
+
+
     private void init(){
         try {
+            mXml = new DomXml(this);
+            mFilters = mXml.XMLResolve();
+            Log.d(TGA, "xml size : " + mFilters.size());
+            for (int i = 0; i < mFilters.size(); i ++){
+                Log.d(TGA, mFilters.get(i).getName());
+            }
             mAppsInfo = new AppsInfo(this);
             mAppInfoList = new ArrayList<>();
             Log.d(TGA, "Enter mAppInfo");
@@ -82,22 +95,41 @@ public class StopRunActivity extends AppCompatActivity {
             mList = mAppsInfo.rebuildRunning();
             Log.d(TGA, "mList Size is " + mList.size());
             for (ApplicationsState.AppEntry appEntry : mList){
-                try {
-                    StopAppInfo appInfo = new StopAppInfo(this, appEntry);
-                    mAppInfoList.add(appInfo);
-                }catch (Exception e){
-                    Log.d(TGA, e.getMessage());
-                    e.printStackTrace();
+                    try {
+                        StopAppInfo appInfo = new StopAppInfo(this, appEntry);
+                        mAppInfoList.add(appInfo);
+                    }catch (Exception e){
+                        Log.d(TGA, e.getMessage());
+                        e.printStackTrace();
+                    }
+            }
+
+            //xml 过滤
+            for (int i = 0; i < mAppInfoList.size(); i ++) {
+                for (int j = 0; j < mFilters.size(); j ++) {
+                    if (mFilters.get(j).getName().equals(mAppInfoList.get(i).getPackageName())){
+                        mAppInfoList.remove(i);
+                        Log.d(TGA, "remove pkgName : " + mAppInfoList.get(i).getPackageName());
+                    }
+//                    if (mFilters[j].getName().equals(info.getPackageName())){
+//                        mAppInfoList.remove(info);
+//                        Log.d(TGA, "remove : " + info.getPackageName());
+//                    }else {
+//                        Log.d(TGA, "filter name = " + filter.getName() + "  "
+//                                + "info.getPackageName = " + info.getPackageName());
+//                    }
                 }
             }
-            for (StopAppInfo appInfo : mAppInfoList){
-                Log.d(TGA, "appInfo: name =" + appInfo.getName()
-                        + "pkgname = " + appInfo.getPackageName()
-                        + " CacheSize =" + appInfo.getCacheSize()
-                        + " DateSize =" + appInfo.getDataSize()
-                        + " Size =" + appInfo.getSize()
-                        + " Version =" + appInfo.getVersion());
-            }
+
+//            for (StopAppInfo appInfo : mAppInfoList){
+//                Log.d(TGA, "appInfo: name =" + appInfo.getName()
+//                        + "pkgname = " + appInfo.getPackageName()
+//                        + " CacheSize =" + appInfo.getCacheSize()
+//                        + " DateSize =" + appInfo.getDataSize()
+//                        + " Size =" + appInfo.getSize()
+//                        + " Version =" + appInfo.getVersion());
+//            }
+
         }catch (Exception e){
             e.printStackTrace();
         }

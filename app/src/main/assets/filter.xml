@@ -1,62 +1,298 @@
 <root author="homer" date="2017-10-19">
-    <filter>
-        <name>com.jrm.localmm</name>
+    <filter><!-- 谷歌拼音输入法 -->
+        <name>com.android.inputmethod.pinyin</name>
     </filter>
-    <filter>
-        <name>com.android.phone</name>
+    <filter><!-- 节目指南 -->
+        <name>com.ktc.epg</name>
     </filter>
-    <filter>
-        <name>com.mstar.miscsetting</name>
-    </filter>
-    <filter>
-        <name>com.mstar.tv.tvplayer.ui</name>
-    </filter>
-    <filter>
-        <name>com.android.email</name>
-    </filter>
-    <filter>
-        <name>com.android.providers.contacts</name>
-    </filter>
-    <filter>
+    <filter><!-- 媒体存储 -->
         <name>com.android.providers.media</name>
     </filter>
-    <filter>
-        <name>com.ktc.systemmanager</name>
+    <filter><!-- 日历存储 -->
+        <name>com.android.providers.calendar</name>
+    </filter>
+    <filter><!-- 软件包安装程序 -->
+        <name>com.android.packageinstaller</name>
+    </filter>
+    <filter><!-- 软件包权限帮助程序 -->
+        <name>com.android.defcontainer</name>
+    </filter>
+    <filter><!-- 设置存储 -->
+        <name>com.android.providers.settings</name>
+    </filter>
+    <filter><!-- 输入设备 -->
+        <name>com.android.inputdevices</name>
+    </filter>
+    <filter><!-- 外部存储设备 -->
+        <name>com.android.externalstorage</name>
+    </filter>
+    <filter><!-- 文档 -->
+        <name>com.android.documentsui</name>
+    </filter>
+    <filter><!-- 下载 -->
+        <name>com.android.providers.downloads.ui</name>
+    </filter>
+    <filter><!-- 一体化位置信息 -->
+        <name>com.android.location.fused</name>
+    </filter>
+    <filter><!-- 用户字典 -->
+        <name>com.android.providers.userdictionary</name>
+    </filter>
+    <filter><!-- 照片屏幕保护程序 -->
+        <name>com.android.dreams.phototable</name>
+    </filter>
+    <filter><!-- 证书安装程序 -->
+        <name>com.android.certinstaller</name>
+    </filter>
+    <filter><!-- Android System WebView :  -->
+        <name>com.android.webview</name>
+    </filter>
+    <filter><!-- Android动态壁纸 : com.android.wallpaper -->
+        <name>com.android.wallpaper</name>
+    </filter>
+    <filter><!-- Android系统 : android -->
+        <name>android</name>
+    </filter>
+    <filter><!-- Black Hole : com.android.galaxy4 -->
+        <name>com.android.galaxy4</name>
+    </filter>
+    <filter><!-- Bluetooth MIDI Service : com.android.bluetoothmidiservice -->
+        <name>com.android.bluetoothmidiservice</name>
+    </filter>
+    <filter><!-- CaptivePortalLogin : com.android.captiveportallogin -->
+        <name>com.android.captiveportallogin</name>
+    </filter>
+    <filter><!-- com.android.backupconfirm : com.android.backupconfirm -->
+        <name>com.android.backupconfirm</name>
+    </filter>
+    <filter><!-- com.android.provision : com.android.provision -->
+        <name>com.android.provision</name>
+    </filter>
+    <filter><!-- com.android.sharedstoragebackup : com.android.sharedstoragebackup -->
+        <name>com.android.sharedstoragebackup</name>
+    </filter>
+    <filter><!-- com.android.wallpaper.holospiral : com.android.wallpaper.holospiral -->
+        <name>com.android.wallpaper.holospiral</name>
+    </filter>
+    <filter><!-- com.android.wallpapercropper : com.android.wallpapercropper -->
+        <name>com.android.wallpapercropper</name>
+    </filter>
+    <filter><!-- com.mstar.电视设置.热键 : com.mstar.tvsetting -->
+        <name>com.mstar.tvsetting</name>
+    </filter>
+    <filter><!-- com.mstar.bluetooth3dservice : com.mstar.bluetooth3dservice -->
+        <name>com.mstar.bluetooth3dservice</name>
+    </filter>
+    <filter><!-- CaptivePortalLogin : com.android.captiveportallogin -->
+        <name>com.android.captiveportallogin</name>
+    </filter>
+    <filter><!-- com.mstar.tv.service : com.mstar.tv.service -->
+        <name>com.mstar.tv.service</name>
+    </filter>
+    <filter><!-- Factory Menu : mstar.factorymenu.ui -->
+        <name>mstar.factorymenu.ui</name>
+    </filter>
+    <filter><!-- Factory Menu_MSD6A838 : ktc.factorymenu.ui -->
+        <name>ktc.factorymenu.ui</name>
+    </filter>
+    <filter><!-- HTML 查看程序 : com.android.htmlviewer -->
+        <name>com.android.htmlviewer</name>
+    </filter>
+    <filter><!-- Intent Filter Verification Service : com.android.statementservice -->
+        <name>com.android.statementservice</name>
+    </filter>
+    <filter><!-- Live Channels : com.mstar.android.tv.app -->
+        <name>com.mstar.android.tv.app</name>
+    </filter>
+    <filter><!-- Live Wallpaper Picker : com.android.wallpaper.livepicker -->
+        <name>com.android.wallpaper.livepicker</name>
+    </filter>
+    <filter><!-- MCast : com.android.mcast -->
+        <name>com.android.mcast</name>
+    </filter>
+    <filter><!-- MediaDrmAPI Test : com.widevine.test -->
+        <name>com.widevine.test</name>
+    </filter>
+    <filter><!-- mStar customer SDK Tests : tvtests.com.mstar.android.tv -->
+        <name>tvtests.com.mstar.android.tv</name>
+    </filter>
+    <filter><!-- MusicFX : com.android.musicfx -->
+        <name>com.android.musicfx</name>
+    </filter>
+    <filter><!-- One Time Init : com.android.onetimeinitializer -->
+        <name>com.android.onetimeinitializer</name>
+    </filter>
+    <filter><!-- PacProcessor : com.android.pacprocessor -->
+        <name>com.android.pacprocessor</name>
+    </filter>
+    <filter><!-- Pico TTS : com.svox.pico -->
+        <name>com.svox.pico</name>
+    </filter>
+    <filter><!-- Pppoe : com.mstar.android.pppoe -->
+        <name>com.mstar.android.pppoe</name>
+    </filter>
+    <filter><!-- ProxyHandler : com.android.proxyhandler -->
+        <name>com.android.proxyhandler</name>
+    </filter>
+    <filter><!-- Shell : com.android.shell -->
+        <name>com.android.shell</name>
+    </filter>
+    <filter><!-- Softinfo Menu : ktc.softmenu.ui -->
+        <name>ktc.softmenu.ui</name>
+    </filter>
+    <filter><!-- TV Applications Provider : com.mstar.android.providers.tv -->
+        <name>com.mstar.android.providers.tv</name>
+    </filter>
+    <filter><!-- TV Storage : com.android.providers.tv -->
+        <name>com.android.providers.tv</name>
+    </filter>
+    <filter><!-- pnDialogs -->
+        <name>com.android.vpndialogs</name>
+    </filter>
+    <filter><!-- Widevine Demo -->
+        <name>com.widevine.demo</name>
     </filter>
 </root>
-<!-- name =本地媒体 pkgname = com.jrm.localmm
-      name =电话 pkgname = com.android.phone
-      name =电视杂项设置 pkgname = com.mstar.miscsetting
-      name =电视BUG pkgname = com.mstar.tv.tvplayer.ui
-      name =电子邮件 pkgname = com.android.email
-      name =谷歌拼音输入法pkgname = com.android.inputmethod.pinyin
-      name =联系人存储 pkgname = com.android.providers.contacts
-      name =媒体存储 pkgname = com.android.providers.media
-      name =内存清理 pkgname = com.ktc.systemmanager
-      name =日历 pkgname = com.android.calendar
-      name =日历存储 pkgname = com.android.providers.calendar
-      name =软件包权限帮助程序 pkgname = com.android.defcontainer
-      name =设置 pkgname = com.android.tv.settings
-      name =时钟 pkgname = com.android.deskclock
-      name =图库 pkgname = com.android.gallery3d
-      name =外部存储设备 pkgname = com.android.externalstorage
-      name =文件管理 pkgname = com.ktc.filemanager
-      name =系统界面 pkgname = com.android.systemui
-      name =系统升级 pkgname = android.systemupdate.service
-      name =下载管理程序 pkgname = com.android.providers.downloads
-      name =一体化位置信息 pkgname = com.android.location.fused
-      name =主页 pkgname = com.android.mslauncher
-      name =Android系统 pkgname = android
-      name =com.mstar.电视设置.热键 pkgname = com.mstar.tvsetting
-      name =com.mstar.tv.service pkgname = com.mstar.tv.service
-      name =Exchange服务pkgname = com.android.exchange
-      name =MCast pkgname = com.android.mcast
-      name =MusicFXpkgname = com.android.musicfx
-      name =NewTV极光pkgname = com.ktcp.tvvideo
-      name =One Time Initpkgname = com.android.onetimeinitializer
-      name =Pico TTS pkgname = com.svox.pico
-      name =Pppoe pkgname = com.mstar.android.pppoe
-      name =TV Applications Provider pkgname = com.mstar.android.providers.tv
-      name =TvHelper pkgname = com.fengjw.tvhelper
-      name =XMLAndroid pkgname = com.homer.xml
+<!-- null 本地媒体 : com.jrm.localmm
+
+电话 : com.android.phone
+
+电视 : com.mstar.tv.tvplayer.ui
+
+电视杂项设置 : com.mstar.miscsetting
+
+电子邮件 : com.android.email
+
+谷歌拼音输入法 : com.android.inputmethod.pinyin
+
+节目指南 : com.ktc.epg
+
+蓝牙共享 : com.android.bcm.bluetooth
+
+联系人存储 : com.android.providers.contacts
+
+浏览器 : com.android.browser
+
+录音机 : com.android.soundrecorder
+
+媒体存储 : com.android.providers.media
+
+内存清理 : com.ktc.systemmanager
+
+日历 : com.android.calendar
+
+日历存储 : com.android.providers.calendar
+
+软件包安装程序 : com.android.packageinstaller
+
+软件包权限帮助程序 : com.android.defcontainer
+
+设置 : com.android.tv.settings
+
+设置存储 : com.android.providers.settings
+
+时钟 : com.android.deskclock
+
+输入设备 : com.android.inputdevices
+
+通讯录 : com.android.contacts
+
+图库 : com.android.gallery3d
+
+外部存储设备 : com.android.externalstorage
+
+文档 : com.android.documentsui
+
+文件管理 : com.ktc.filemanager
+
+系统界面 : com.android.systemui
+
+系统升级 : android.systemupdate.service
+
+下载 : com.android.providers.downloads.ui
+
+下载管理程序 : com.android.providers.downoads
+
+一体化位置信息 : com.android.location.fused
+
+用户字典 : com.android.providers.userdictionary
+
+照片屏幕保护程序 : com.android.dreams.phototable
+
+证书安装程序 : com.android.certinstaller
+
+主页 : com.android.mslauncher
+
+Android System WebView : com.android.webview
+
+Android动态壁纸 : com.android.wallpaper
+
+Android系统 : android
+
+Black Hole : com.android.galaxy4
+
+Bluetooth MIDI Service : com.android.bluetoothmidiservice
+
+CaptivePortalLogin : com.android.captiveportallogin
+
+com.android.backupconfirm : com.android.backupconfirm
+
+com.android.provision : com.android.provision
+
+com.android.sharedstoragebackup : com.android.sharedstoragebackup
+
+com.android.wallpaper.holospiral : com.android.wallpaper.holospiral
+
+com.android.wallpapercropper : com.android.wallpapercropper
+
+com.mstar.电视设置.热键 : com.mstar.tvsetting
+
+com.mstar.bluetooth3dservice : com.mstar.bluetooth3dservice
+
+com.mstar.tv.service : com.mstar.tv.service
+
+Exchange服务 : com.android.exchange
+
+Factory Menu : mstar.factorymenu.ui
+
+Factory Menu_MSD6A838 : ktc.factorymenu.ui
+
+HTML 查看程序 : com.android.htmlviewer
+
+Intent Filter Verification Service : com.android.statementservice
+
+Live Channels : com.mstar.android.tv.app
+
+Live Wallpaper Picker : com.android.wallpaper.livepicker
+
+MCast : com.android.mcast
+
+MediaDrmAPI Test : com.widevine.test
+
+mStar customer SDK Tests : tvtests.com.mstar.android.tv
+
+MusicFX : com.android.musicfx
+
+NewTV极光 : com.ktcp.tvvideo
+
+One Time Init : com.android.onetimeinitializer
+
+PacProcessor : com.android.pacprocessor
+
+Pico TTS : com.svox.pico
+
+Pppoe : com.mstar.android.pppoe
+
+ProxyHandler : com.android.proxyhandler
+
+Shell : com.android.shell
+
+Softinfo Menu : ktc.softmenu.ui
+
+TV Applications Provider : com.mstar.android.providers.tv
+
+TV Storage : com.android.providers.tv
+
+TvHelper : com.fengjw.tvhelper
+
      -->
