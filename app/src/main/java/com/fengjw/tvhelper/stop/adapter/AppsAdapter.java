@@ -2,11 +2,7 @@ package com.fengjw.tvhelper.stop.adapter;
 
 import android.app.Application;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.os.Environment;
-import android.os.UserHandle;
-import android.os.storage.StorageManager;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,11 +16,9 @@ import android.widget.Toast;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.R;
-import com.fengjw.tvhelper.stop.utils.DomXml;
+import com.fengjw.tvhelper.stop.AppManagementActivity;
 import com.fengjw.tvhelper.stop.utils.ForceStopManager;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
-
-import java.io.IOException;
 import java.util.List;
 
 import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
@@ -82,18 +76,22 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
                 try {
                     mAppInfo = mList.get(position);//这里是获取当前要清除的Apk信息
                     //因为在onBindViewHolder中会加载很多的apk信息，但是每次删除一个
-                    Toast.makeText(mContext, "删除 " + mAppInfo.getName(),
-                            Toast.LENGTH_SHORT).show();
-                    mForceStopManager = new ForceStopManager(mContext, mAppInfo);
-                    if (mForceStopManager.canForceStop()){
-                        onForceStopOk();
-                        //Log.d(TGA, "getItemId : " + getItemId(position));
-                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
-                        removeData(position);
-                        Log.d(TGA, "delete");
-                    }else {
-                        Log.d(TGA, "no delete");
-                    }
+//                    Toast.makeText(mContext, "删除 " + mAppInfo.getName(),
+//                            Toast.LENGTH_SHORT).show();
+//                    mForceStopManager = new ForceStopManager(mContext, mAppInfo);
+//                    if (mForceStopManager.canForceStop()){
+//                        onForceStopOk();
+//                        //Log.d(TGA, "getItemId : " + getItemId(position));
+//                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
+//                        removeData(position);
+//                        Log.d(TGA, "delete");
+//                    }else {
+//                        Log.d(TGA, "no delete");
+//                    }
+                    //startApp(mAppInfo.getPackageName());
+                    Intent intent = new Intent(mContext, AppManagementActivity.class);
+                    mContext.startActivity(intent);
+                    Log.d(TGA, "mPackageName : " + mAppInfo.getPackageName());
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -102,7 +100,15 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
         Log.d(TGA, "onBindViewHolder");
     }
 
-
+    public void startApp(String appPackageName){
+        try {
+            Intent intent = mContext.getPackageManager().getLaunchIntentForPackage(appPackageName);
+            mContext.startActivity(intent);
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(mContext, "当前apk不能打开", Toast.LENGTH_SHORT).show();
+        }
+    }
 
 //    private void init(){
 //        mPackageName = mAppInfo.getPackageName();

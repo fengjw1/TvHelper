@@ -152,6 +152,33 @@
     <filter><!-- Widevine Demo -->
         <name>com.widevine.demo</name>
     </filter>
+    <filter><!-- 电视杂项设置 -->
+        <name>com.mstar.miscsetting</name>
+    </filter>
+    <filter><!-- 打印处理服务 -->
+        <name>com.android.printspooler</name>
+    </filter>
+    <filter><!-- 基本互动屏保 -->
+        <name>com.android.dreams.basic</name>
+    </filter>
+    <filter><!-- 密钥链 -->
+        <name>com.android.keychain</name>
+    </filter>
+    <filter><!-- 系统升级 -->
+        <name>android.systemupdate.service</name>
+    </filter>
+    <filter><!-- 蓝牙共享 -->
+        <name>com.android.bcm.bluetooth</name>
+    </filter>
+    <filter><!-- 蓝牙共享 -->
+        <name>com.android.bluetooth</name>
+    </filter>
+    <filter><!-- 镭光 -->
+        <name>com.android.phasebeam</name>
+    </filter>
+    <filter><!-- 泡泡 -->
+        <name>com.android.noisefield</name>
+    </filter>
 </root>
 <!-- null 本地媒体 : com.jrm.localmm
 
