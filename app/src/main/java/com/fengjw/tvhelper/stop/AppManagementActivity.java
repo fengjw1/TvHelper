@@ -160,12 +160,12 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.tv_open_app:
                 // TODO 17/10/23
-                toast("open");
+                //toast("open");
                 startApp(packageName);
                 break;
             case R.id.tv_stop_app:
                 // TODO 17/10/23
-                toast("stop");
+                toast("已停止运行" + mAppInfo.getName());
                 if (mForceStopManager.canForceStop()){
                         onForceStopOk();
                         //Log.d(TGA, "getItemId : " + getItemId(position));
