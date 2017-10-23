@@ -19,7 +19,10 @@ import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.stop.AppManagementActivity;
 import com.fengjw.tvhelper.stop.utils.ForceStopManager;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
+
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
 
@@ -27,7 +30,7 @@ import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
  * Created by fengjw on 2017/10/11.
  */
 
-public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
+public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> implements View.OnClickListener{
 
 
     private Context mContext;
@@ -40,6 +43,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
     private StopAppInfo mAppInfo;
     private Application app;
     private String mPackageName;
+    private OnItemClickListener mOnItemClickListener = null;
 
     public AppsAdapter(Context context, List<StopAppInfo> list, Application app) {
         super();
@@ -51,12 +55,26 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
         Log.d(TGA, "AppsAdapter!");
     }
 
+    public static interface OnItemClickListener{
+        void onItemClick(View view, int position);
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        if (mOnItemClickListener != null) {
+            //注意这里使用getTag方法获取position
+            mOnItemClickListener.onItemClick(v,(int)v.getTag());
+        }
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mLayoutInflater.inflate(R.layout.item_listview_new, parent, false);
         Log.d(TGA, "onCreateViewHolder");
-        return new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view);
+        view.setOnClickListener(this);
+        return viewHolder;
     }
 
     @Override
@@ -70,45 +88,45 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> {
 
         //holder.btn_stoprun.setText(mAppInfo.getName());
         //holder.btn_stoprun.setFocusable(true);
-        holder.mLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    mAppInfo = mList.get(position);//这里是获取当前要清除的Apk信息
-                    //因为在onBindViewHolder中会加载很多的apk信息，但是每次删除一个
-//                    Toast.makeText(mContext, "删除 " + mAppInfo.getName(),
-//                            Toast.LENGTH_SHORT).show();
-//                    mForceStopManager = new ForceStopManager(mContext, mAppInfo);
-//                    if (mForceStopManager.canForceStop()){
-//                        onForceStopOk();
-//                        //Log.d(TGA, "getItemId : " + getItemId(position));
-//                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
-//                        removeData(position);
-//                        Log.d(TGA, "delete");
-//                    }else {
-//                        Log.d(TGA, "no delete");
-//                    }
-                    //startApp(mAppInfo.getPackageName());
-                    Intent intent = new Intent(mContext, AppManagementActivity.class);
-                    mContext.startActivity(intent);
-                    Log.d(TGA, "mPackageName : " + mAppInfo.getPackageName());
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
+//        holder.mLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                try {
+//                    mAppInfo = mList.get(position);//这里是获取当前要清除的Apk信息
+//                    //因为在onBindViewHolder中会加载很多的apk信息，但是每次删除一个
+////                    Toast.makeText(mContext, "删除 " + mAppInfo.getName(),
+////                            Toast.LENGTH_SHORT).show();
+////                    mForceStopManager = new ForceStopManager(mContext, mAppInfo);
+////                    if (mForceStopManager.canForceStop()){
+////                        onForceStopOk();
+////                        //Log.d(TGA, "getItemId : " + getItemId(position));
+////                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
+////                        removeData(position);
+////                        Log.d(TGA, "delete");
+////                    }else {
+////                        Log.d(TGA, "no delete");
+////                    }
+//                    //startApp(mAppInfo.getPackageName());
+//                    Intent intent = new Intent(mContext, AppManagementActivity.class);
+//                    intent.putExtra("data",(Serializable) mList);
+//                    intent.putExtra("position", position);
+//                    mContext.startActivity(intent);
+//                    Log.d(TGA, "mPackageName : " + mAppInfo.getPackageName());
+//                }catch (Exception e){
+//                    e.printStackTrace();
+//                    Log.d(TGA, e.getMessage());
+//                }
+//            }
+//        });
         Log.d(TGA, "onBindViewHolder");
+        holder.itemView.setTag(position);
     }
 
-    public void startApp(String appPackageName){
-        try {
-            Intent intent = mContext.getPackageManager().getLaunchIntentForPackage(appPackageName);
-            mContext.startActivity(intent);
-        }catch (Exception e){
-            e.printStackTrace();
-            Toast.makeText(mContext, "当前apk不能打开", Toast.LENGTH_SHORT).show();
-        }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mOnItemClickListener = listener;
     }
+
+
 
 //    private void init(){
 //        mPackageName = mAppInfo.getPackageName();

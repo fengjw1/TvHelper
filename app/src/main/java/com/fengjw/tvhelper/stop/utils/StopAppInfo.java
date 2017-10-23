@@ -3,15 +3,20 @@ package com.fengjw.tvhelper.stop.utils;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.graphics.drawable.Drawable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.format.Formatter;
 
 import com.android.settingslib.applications.ApplicationsState;
+
+import java.io.Serializable;
 
 /**
  * Created by fengjw on 2017/10/10.
  */
 
 public class StopAppInfo {
+
     private final Object mLock = new Object();
     private final Context mContext;
     private ApplicationsState.AppEntry mEntry;
@@ -125,4 +130,5 @@ public class StopAppInfo {
     public String toString() {
         return getName();
     }
+
 }

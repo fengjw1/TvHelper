@@ -2,12 +2,15 @@ package com.fengjw.tvhelper.stop;
 
 import android.app.Application;
 import android.app.usage.UsageStatsManager;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.R;
@@ -72,6 +75,19 @@ public class StopRunActivity extends AppCompatActivity {
             animator.setRemoveDuration(1000);
             mView.setItemAnimator(animator);
             mView.scrollToPosition(0);
+
+            mAdapter.setOnItemClickListener(new AppsAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(StopRunActivity.this, AppManagementActivity.class);
+                    intent.putExtra("name", mAppInfoList.get(position).getPackageName());
+                    //intent.putExtra("position", position);
+                    startActivity(intent);
+                    Toast.makeText(StopRunActivity.this, mAppInfoList.get(position).getPackageName(), Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            });
+
             
         }catch (Exception e){
             e.printStackTrace();
@@ -79,6 +95,15 @@ public class StopRunActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 1){
+            if (requestCode == 1){
+
+            }
+        }
+    }
 
     private void init(){
         try {
