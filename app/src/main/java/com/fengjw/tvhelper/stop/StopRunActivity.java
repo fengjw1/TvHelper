@@ -84,11 +84,9 @@ public class StopRunActivity extends AppCompatActivity {
                     //intent.putExtra("position", position);
                     startActivity(intent);
                     Toast.makeText(StopRunActivity.this, mAppInfoList.get(position).getPackageName(), Toast.LENGTH_SHORT).show();
-                    finish();
+                    //finish();
                 }
             });
-
-            
         }catch (Exception e){
             e.printStackTrace();
         }

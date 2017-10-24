@@ -215,6 +215,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }else if (view == mLayout.getChildAt(1)){
             intent.setClass(this, StopRunActivity.class);
             startActivity(intent);
+        }else if (view == mLayout.getChildAt(2)){
+            String pkgName = "com.ktc.filemanager";
+            startApp(pkgName);
         }
     }
+
+    public void startApp(String appPackageName){
+        try {
+            Intent intent = getPackageManager().getLaunchIntentForPackage(appPackageName);
+            startActivity(intent);
+            //finish();
+        }catch (Exception e){
+            e.printStackTrace();
+            Toast.makeText(this, "文件管理未安装！", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
