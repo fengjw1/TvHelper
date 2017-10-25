@@ -3,6 +3,8 @@ package com.fengjw.tvhelper.stop;
 import android.app.Application;
 import android.app.usage.UsageStatsManager;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -43,6 +45,30 @@ public class StopRunActivity extends AppCompatActivity {
     private DomXml mXml;
     private List<Filter> mFilters;
     private UsageStatsManager mManager;
+    private int resultPosition;
+    private Intent intent;
+    private static final int STOP_RUN = 1;
+    private static final int CONTINUE_RUN = 2;
+    private static final int REFRESH_UI = 3;
+
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case REFRESH_UI:
+                    Log.d("fengjw", "handle");
+                    //init();
+                    mAppInfoList.remove(resultPosition);
+                    mAdapter.notifyItemRemoved(resultPosition);
+                    mAdapter.notifyDataSetChanged();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,19 +96,21 @@ public class StopRunActivity extends AppCompatActivity {
             border.attachTo(mView);
             mView.setFocusable(false);
             mView.setAdapter(mAdapter);
-            DefaultItemAnimator animator = new DefaultItemAnimator();
-            animator.setAddDuration(1000);
-            animator.setRemoveDuration(1000);
-            mView.setItemAnimator(animator);
+//            DefaultItemAnimator animator = new DefaultItemAnimator();
+//            animator.setAddDuration(1000);
+//            animator.setRemoveDuration(1000);
+//            mView.setItemAnimator(animator);
             mView.scrollToPosition(0);
 
             mAdapter.setOnItemClickListener(new AppsAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(StopRunActivity.this, AppManagementActivity.class);
+                    intent = new Intent(StopRunActivity.this, AppManagementActivity.class);
                     intent.putExtra("name", mAppInfoList.get(position).getPackageName());
                     //intent.putExtra("position", position);
-                    startActivity(intent);
+                    //startActivity(intent);
+                    resultPosition = position;
+                    startActivityForResult(intent, 1);
                     Toast.makeText(StopRunActivity.this, mAppInfoList.get(position).getPackageName(), Toast.LENGTH_SHORT).show();
                     //finish();
                 }
@@ -96,11 +124,25 @@ public class StopRunActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 1){
-            if (requestCode == 1){
-
-            }
+        switch (requestCode){
+            case 1:
+                break;
+            default:
+                break;
         }
+
+        switch (resultCode){
+            case STOP_RUN:
+                Log.d("fengjw", "STOP_RUN");
+                mHandler.sendEmptyMessage(REFRESH_UI);
+                break;
+            case CONTINUE_RUN:
+                Log.d(TGA, "CONTINUE_RUN");
+                break;
+            default:
+                break;
+        }
+
     }
 
     private void init(){
@@ -162,6 +204,23 @@ public class StopRunActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //mAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override

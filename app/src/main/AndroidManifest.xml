@@ -63,7 +63,8 @@
             android:name=".stop.DetailActivity"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Dialog"/>
-        <activity android:name=".stop.StopRunActivity">
+        <activity android:name=".stop.StopRunActivity"
+            android:launchMode="singleInstance">
         </activity>
         <activity android:name=".stop.AppManagementActivity">
         </activity>

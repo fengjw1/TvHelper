@@ -43,6 +43,10 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
     private List<ApplicationsState.AppEntry> mList;
     private List<StopAppInfo> mAppInfoList;
     private String packageName;
+    private int position;
+
+    private static final int STOP_RUN = 1;
+    private static final int CONTINUE_RUN = 2;
 
     private ForceStopManager mForceStopManager;
     private ApplicationsState mApplicationsState;
@@ -53,6 +57,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_management_app);
 
         packageName = getIntent().getStringExtra("name");
+        //position = getIntent().getIntExtra("position", 0);
 
         Log.d(TAG, "packageName : " + packageName);
 
@@ -173,8 +178,9 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                         //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
                         //removeData(position);
                         Log.d(TGA, "delete");
-                    Intent intent = new Intent(this, StopRunActivity.class);
-                    startActivity(intent);
+                    //Intent intent = new Intent(this, StopRunActivity.class);
+                    //intent.putExtra("position", position);
+                    this.setResult(STOP_RUN);
                     finish();
                     }else {
                         Log.d(TGA, "no delete");
@@ -190,6 +196,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK){
             try {
+                this.setResult(CONTINUE_RUN);
                 finish();
             }catch (Exception e){
                 e.printStackTrace();
