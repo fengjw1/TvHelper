@@ -24,7 +24,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+                    android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -34,7 +35,8 @@
         <activity android:name=".update.DownloadAllActivity"/>
         <activity
             android:name=".update.PushDialogActivity"
-            android:theme="@style/AppTheme.Dialog"/>
+            android:theme="@style/AppTheme.Dialog"
+            android:excludeFromRecents="true"/>
 
         <receiver android:name=".update.service.NetworkStateReceiver">
             <intent-filter>
@@ -63,10 +65,13 @@
             android:name=".stop.DetailActivity"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Dialog"/>
-        <activity android:name=".stop.StopRunActivity"
+        <activity
+            android:name=".stop.StopRunActivity"
             android:launchMode="singleInstance">
         </activity>
         <activity android:name=".stop.AppManagementActivity">
+        </activity>
+        <activity android:name=".recenttask.RecentTaskActivity">
         </activity>
     </application>
 

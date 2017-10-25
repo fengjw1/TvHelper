@@ -119,8 +119,7 @@ public class StopRunActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
-
+    
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -130,6 +129,13 @@ public class StopRunActivity extends AppCompatActivity {
             default:
                 break;
         }
+
+//        switch (resultCode){
+//            case 1:
+//                break;
+//            default:
+//                break;
+//        }
 
         switch (resultCode){
             case STOP_RUN:

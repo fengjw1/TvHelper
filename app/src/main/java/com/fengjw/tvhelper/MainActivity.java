@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.settingslib.applications.ApplicationsState;
+import com.fengjw.tvhelper.recenttask.RecentTaskActivity;
 import com.fengjw.tvhelper.stop.StopRunActivity;
 import com.fengjw.tvhelper.stop.StopRunningActivity;
 import com.fengjw.tvhelper.stop.utils.AppsInfo;
@@ -218,6 +219,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }else if (view == mLayout.getChildAt(2)){
             String pkgName = "com.ktc.filemanager";
             startApp(pkgName);
+        }else if (view == mLayout.getChildAt(3)){
+            intent.setClass(this, RecentTaskActivity.class);
+            startActivity(intent);
         }
     }
 

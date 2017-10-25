@@ -68,6 +68,20 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 
+            <TextView
+                android:id="@+id/tv_recenttask"
+                android:layout_width="290dp"
+                android:layout_height="446dp"
+                android:layout_margin="16dp"
+                android:layout_toRightOf="@+id/tv_file"
+                android:background="@color/darkgray"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="近期任务列表"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+
         </RelativeLayout>
 
 
