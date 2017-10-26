@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,7 @@ public class RecentTaskActivity extends AppCompatActivity implements View.OnClic
     private static ActivityManager am;
     private TextView mShowTv;
     private static String apps = "";
+    private List<ActivityManager.AppTask> appTasks;
 
 
     //
@@ -53,6 +55,7 @@ public class RecentTaskActivity extends AppCompatActivity implements View.OnClic
         initView();
         //mString = getRecentList(this);
         reloadButtons(this, appInfos, 20);
+        getTaskApps();
 //        HashMap<String, Object> singleAppInfo = new HashMap<String, Object>();
 //        for (int i = 0; i < appInfos.size(); i++) {
 //            singleAppInfo = appInfos.get(i);
@@ -76,6 +79,7 @@ public class RecentTaskActivity extends AppCompatActivity implements View.OnClic
                 }else {
                     Log.d("fengjw", "intent is null!");
                 }
+
             }
         });
 
@@ -140,6 +144,12 @@ public class RecentTaskActivity extends AppCompatActivity implements View.OnClic
         final List<ActivityManager.RecentTaskInfo> recentTasks = am
                 .getRecentTasks(MAX_RECENT_TASKS + 1, 0x0002);
 
+//        final List<ActivityManager.RunningTaskInfo> recentTaskInfos = am.getRunningTasks(20);
+//        Log.d("fengjw", "size : " + recentTaskInfos.size());
+//        for (int i = 0; i < recentTaskInfos.size(); i ++){
+//            Log.d("fengjw", recentTaskInfos.get(i).baseActivity.toString());
+//        }
+
         // 这个activity的信息是我们的launcher
         ActivityInfo homeInfo = new Intent(Intent.ACTION_MAIN).addCategory(
                 Intent.CATEGORY_HOME).resolveActivityInfo(pm, 0);
@@ -174,7 +184,7 @@ public class RecentTaskActivity extends AppCompatActivity implements View.OnClic
                 final String title = activityInfo.loadLabel(pm).toString();
                 Drawable icon = activityInfo.loadIcon(pm);
 
-                if (title != null && title.length() > 0 && icon != null) {
+                if (title != null && title.length() > 0 && icon != null && info.id != -1) {
                     singleAppInfo.put("title", title);
                     singleAppInfo.put("icon", icon);
                     singleAppInfo.put("tag", intent);
@@ -202,6 +212,34 @@ public class RecentTaskActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+
+    private void getTaskApps(){
+        try {
+
+            ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+            appTasks = am.getAppTasks();
+            List<ActivityManager.RecentTaskInfo> recentTaskInfos ;
+            ActivityManager.RecentTaskInfo recentTaskInfo;
+            Log.d("fengjw", appTasks.size() + "");
+            for (int i = 0; i < appTasks.size(); i ++){
+                recentTaskInfo = appTasks.get(i).getTaskInfo();
+                //finishAndRemoveTask();
+                Log.d("fengjw", "baseActivity" + recentTaskInfo.baseActivity.toString());
+                Log.d("fengjw", "baseIntent" + recentTaskInfo.baseIntent.toString());
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    private void getRecentApps(){
+        final Context context = getApplication();
+        final ActivityManager am = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        //final List<ActivityManager.RecentTaskInfo> recentTaskInfoCreator = am.get
+
+    }
 
     @Override
     public void onClick(View v) {

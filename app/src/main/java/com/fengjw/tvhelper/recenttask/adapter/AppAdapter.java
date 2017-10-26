@@ -58,6 +58,9 @@ public class AppAdapter extends BaseAdapter{
     public View getView(int i, View view, final ViewGroup viewGroup) {
         //final ViewHolder mHolder;
         singleAppInfo = appInfos.get(i);
+//        if (singleAppInfo.get("packageName").equals("com.fengjw.tvhelper")){
+//            appInfos.remove(i);
+//        }
         view = mInflater.inflate(R.layout.item_listview, null);
         ImageView image = (ImageView) view.findViewById(R.id.image_app);
         TextView name = (TextView) view.findViewById(R.id.name_app);
