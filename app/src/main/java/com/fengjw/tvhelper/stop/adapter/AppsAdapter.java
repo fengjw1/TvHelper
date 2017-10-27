@@ -85,7 +85,6 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.ViewHolder> im
         holder.name.setText(mAppInfo.getName());
         holder.size.setText(mAppInfo.getSize());
         holder.cachesize.setText(mAppInfo.getCacheSize());
-
         //holder.btn_stoprun.setText(mAppInfo.getName());
         //holder.btn_stoprun.setFocusable(true);
 //        holder.mLayout.setOnClickListener(new View.OnClickListener() {
