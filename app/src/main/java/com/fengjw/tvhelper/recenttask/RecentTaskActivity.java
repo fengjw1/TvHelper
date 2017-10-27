@@ -220,7 +220,8 @@ public class RecentTaskActivity extends AppCompatActivity{
                 final String title = activityInfo.loadLabel(pm).toString();
                 Drawable icon = activityInfo.loadIcon(pm);
 
-                if (title != null && title.length() > 0 && icon != null && info.id != -1) {
+                //&& info.id != -1
+                if (title != null && title.length() > 0 && icon != null ) {
                     singleAppInfo.put("title", title);
                     singleAppInfo.put("icon", icon);
                     singleAppInfo.put("tag", intent);

@@ -11,7 +11,6 @@ import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -23,8 +22,6 @@ import android.widget.Toast;
 import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.stop.utils.AppsInfo;
-import com.fengjw.tvhelper.stop.utils.DomXml;
-import com.fengjw.tvhelper.stop.utils.Filter;
 import com.fengjw.tvhelper.stop.utils.ForceStopManager;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 
@@ -46,9 +43,6 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
     private TextView mOpenApp;
     private TextView mStopAppTv;
     private StopAppInfo mAppInfo;
-
-    private DomXml mXml;
-    private List<Filter> mFilters;
     private AppsInfo mAppsInfo;
     private List<ApplicationsState.AppEntry> mList;
     private List<StopAppInfo> mAppInfoList;
@@ -78,7 +72,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         initView();
         init();
         bindView();
-        reloadButtons(this, appInfos, 20);
+        reloadButtons(this, appInfos, 5);
     }
 
     public static void reloadButtons(Activity activity, List<HashMap<String, Object>> appInfos, int appNumber) {
@@ -140,7 +134,8 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                 final String title = activityInfo.loadLabel(pm).toString();
                 Drawable icon = activityInfo.loadIcon(pm);
 
-                if (title != null && title.length() > 0 && icon != null && info.id != -1) {
+                //&& info.id != -1
+                if (title != null && title.length() > 0 && icon != null ) {
                     singleAppInfo.put("title", title);
                     singleAppInfo.put("icon", icon);
                     singleAppInfo.put("tag", intent);
@@ -154,12 +149,6 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
 
     private void init(){
         try {
-            mXml = new DomXml(this);
-            mFilters = mXml.XMLResolve();
-            Log.d(TAG, "xml size : " + mFilters.size());
-//            for (int i = 0; i < mFilters.size(); i ++){
-//                Log.d(TGA, mFilters.get(i).getName());
-//            }
             mAppsInfo = new AppsInfo(this);
             mAppInfoList = new ArrayList<>();
             Log.d(TAG, "Enter mAppInfo");
@@ -186,18 +175,17 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
 //                }
 //            }
 
-            showLog("size is " + mAppInfoList.size());
+            //showLog("size is " + mAppInfoList.size());
             for (int i = 0; i < mAppInfoList.size(); i ++){
                 if (packageName.equals(mAppInfoList.get(i).getPackageName())){
                     mAppInfo = mAppInfoList.get(i);
-                    showLog("position : " + i);
+                    //showLog("position : " + i);
                     break;
                 }
             }
             //mAppInfo = mAppInfoList.get(position);
 
-            Log.d(TAG, "mAppInfo : " + mAppInfo.getPackageName() + " " + mAppInfo.getName());
-
+            //Log.d(TAG, "mAppInfo : " + mAppInfo.getPackageName() + " " + mAppInfo.getName());
             mForceStopManager = new ForceStopManager(this, mAppInfo);
             mApplicationsState = ApplicationsState.getInstance(getApplication());
             Log.d(TAG, "mAppInfoList Size is " + mAppInfoList.size());
@@ -222,12 +210,9 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
 
     private void initView() {
         mAppImage = (ImageView) findViewById(R.id.image_app);
-        mAppImage.setOnClickListener(this);
         m1AppTv = (TextView) findViewById(R.id.tv_1_app);
         mNameApp = (TextView) findViewById(R.id.tv_name_app);
-        mNameApp.setOnClickListener(this);
         mVersionApp = (TextView) findViewById(R.id.tv_version_app);
-        mVersionApp.setOnClickListener(this);
         mAppLin = (LinearLayout) findViewById(R.id.lin_app);
         mOpenApp = (TextView) findViewById(R.id.tv_open_app);
         mOpenApp.setOnClickListener(this);
@@ -240,22 +225,11 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.image_app:
-                // TODO 17/10/23
-                break;
-            case R.id.tv_name_app:
-                // TODO 17/10/23
-                break;
-            case R.id.tv_version_app:
-                // TODO 17/10/23
-                break;
             case R.id.tv_open_app:
-                // TODO 17/10/23
                 //toast("open");
                 startApp(packageName);
                 break;
             case R.id.tv_stop_app:
-                // TODO 17/10/23
                 toast("已停止运行" + mAppInfo.getName());
                 if (mForceStopManager.canForceStop()){
                         onForceStopOk();
@@ -270,7 +244,6 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                     }else {
                         Log.d(TGA, "no delete");
                     }
-
                 break;
             default:
                 break;
@@ -312,7 +285,11 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                     finish();
                 }
                 catch (ActivityNotFoundException e) {
+                    e.printStackTrace();
                     Log.d("fengjw", "Unable to launch recent task", e);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
                 }
             }else {
                 Log.d("fengjw", "intent is null!");
