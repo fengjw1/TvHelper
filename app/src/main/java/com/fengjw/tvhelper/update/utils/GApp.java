@@ -17,13 +17,10 @@ package com.fengjw.tvhelper.update.utils;
 
 import android.app.Activity;
 import android.app.Application;
-import android.os.Environment;
 import android.util.Log;
 
 import com.android.settingslib.applications.ApplicationsState;
-import com.fengjw.tvhelper.MainActivity;
 import com.fengjw.tvhelper.stop.utils.AppsInfo;
-import com.fengjw.tvhelper.stop.utils.DomXml;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;

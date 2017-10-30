@@ -232,14 +232,14 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
             case R.id.tv_stop_app:
                 toast("已停止运行" + mAppInfo.getName());
                 if (mForceStopManager.canForceStop()){
-                        onForceStopOk();
-                        //Log.d(TGA, "getItemId : " + getItemId(position));
-                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
-                        //removeData(position);
-                        Log.d(TGA, "delete");
-                    //Intent intent = new Intent(this, StopRunActivity.class);
-                    //intent.putExtra("position", position);
-                    this.setResult(STOP_RUN);
+//                        onForceStopOk();
+//                        //Log.d(TGA, "getItemId : " + getItemId(position));
+//                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
+//                        //removeData(position);
+//                        Log.d(TGA, "delete");
+//                    //Intent intent = new Intent(this, StopRunActivity.class);
+//                    //intent.putExtra("position", position);
+//                    this.setResult(STOP_RUN);
                     finish();
                     }else {
                         Log.d(TGA, "no delete");
