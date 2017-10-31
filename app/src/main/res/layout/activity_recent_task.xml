@@ -11,6 +11,7 @@
         android:id="@+id/rv_recent_task"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/home_bg"
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:layout_margin="20dp"

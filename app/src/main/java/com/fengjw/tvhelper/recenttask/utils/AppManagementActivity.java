@@ -19,17 +19,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.R;
-import com.fengjw.tvhelper.stop.utils.AppsInfo;
-import com.fengjw.tvhelper.stop.utils.ForceStopManager;
-import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import static com.fengjw.tvhelper.stop.StopRunActivity.TGA;
 
 public class AppManagementActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -42,37 +37,27 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
     private LinearLayout mAppLin;
     private TextView mOpenApp;
     private TextView mStopAppTv;
-    private StopAppInfo mAppInfo;
-    private AppsInfo mAppsInfo;
-    private List<ApplicationsState.AppEntry> mList;
-    private List<StopAppInfo> mAppInfoList;
     private String packageName;
     private int position;
     private static final int STOP_RUN = 1;
     private static final int CONTINUE_RUN = 2;
 
-    private ForceStopManager mForceStopManager;
-    private ApplicationsState mApplicationsState;
 
     //
     private Intent mIntent;
-    private static List<ActivityManager.RecentTaskInfo> list;
     private List<HashMap<String, Object>> appInfos = new ArrayList<HashMap<String, Object>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_management_app);
-        Bundle mBundle = getIntent().getExtras();
-        //packageName = mBundle.getString("packageName");
         packageName = getIntent().getStringExtra("packageName");
-        //position = getIntent().getIntExtra("position", 0);
+        position = getIntent().getIntExtra("position", 0);
         Log.d(TAG, "packageName : " + packageName);
-
+        reloadButtons(this, appInfos, 16);
         initView();
-        init();
+        //init();
         bindView();
-        reloadButtons(this, appInfos, 5);
     }
 
     public static void reloadButtons(Activity activity, List<HashMap<String, Object>> appInfos, int appNumber) {
@@ -104,7 +89,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         ActivityInfo homeInfo = new Intent(Intent.ACTION_MAIN).addCategory(
                 Intent.CATEGORY_HOME).resolveActivityInfo(pm, 0);
         int numTasks = recentTasks.size();
-        for (int i = 0; i < numTasks && (i < MAX_RECENT_TASKS); i++) {
+        for (int i = 1; i < numTasks && (i < MAX_RECENT_TASKS); i++) {
             HashMap<String, Object> singleAppInfo = new HashMap<String, Object>();// 当个启动过的应用程序的信息
             final ActivityManager.RecentTaskInfo info = recentTasks.get(i);
 
@@ -140,6 +125,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                     singleAppInfo.put("icon", icon);
                     singleAppInfo.put("tag", intent);
                     singleAppInfo.put("packageName", activityInfo.packageName);
+                    singleAppInfo.put("id", info.persistentId);
                     appInfos.add(singleAppInfo);
                 }
             }
@@ -147,65 +133,11 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         MAX_RECENT_TASKS = repeatCount;
     }
 
-    private void init(){
-        try {
-            mAppsInfo = new AppsInfo(this);
-            mAppInfoList = new ArrayList<>();
-            Log.d(TAG, "Enter mAppInfo");
-            mAppsInfo.init();
-            mList = mAppsInfo.rebuildRunning();
-            for (ApplicationsState.AppEntry appEntry : mList){
-                try {
-                    StopAppInfo appInfo = new StopAppInfo(this, appEntry);
-                    mAppInfoList.add(appInfo);
-                }catch (Exception e){
-                    Log.d(TGA, e.getMessage());
-                    e.printStackTrace();
-                }
-            }
-
-            //xml 过滤
-//            showLog("xml 过滤");
-//            for (int i = 0; i < mAppInfoList.size(); i ++) {
-//                for (int j = 0; j < mFilters.size(); j ++) {
-//                    if (mFilters.get(j).getName().equals(mAppInfoList.get(i).getPackageName())){
-//                        mAppInfoList.remove(i);
-//                        //Log.d(TGA, "remove pkgName : " + mAppInfoList.get(i).getPackageName());
-//                    }
-//                }
-//            }
-
-            //showLog("size is " + mAppInfoList.size());
-            for (int i = 0; i < mAppInfoList.size(); i ++){
-                if (packageName.equals(mAppInfoList.get(i).getPackageName())){
-                    mAppInfo = mAppInfoList.get(i);
-                    //showLog("position : " + i);
-                    break;
-                }
-            }
-            //mAppInfo = mAppInfoList.get(position);
-
-            //Log.d(TAG, "mAppInfo : " + mAppInfo.getPackageName() + " " + mAppInfo.getName());
-            mForceStopManager = new ForceStopManager(this, mAppInfo);
-            mApplicationsState = ApplicationsState.getInstance(getApplication());
-            Log.d(TAG, "mAppInfoList Size is " + mAppInfoList.size());
-
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.d(TAG, e.getMessage());
-        }
-    }
-
-    private void onForceStopOk() {
-        mForceStopManager.forceStop(mApplicationsState);
-        Log.d(TAG, "onForceStopOK");
-        //onBackPressed();
-    }
 
     private void bindView(){
-        mAppImage.setImageDrawable(mAppInfo.getIconResource());
-        mNameApp.setText(mAppInfo.getName());
-        mVersionApp.setText(mAppInfo.getVersion());
+        mAppImage.setImageDrawable((Drawable) appInfos.get(position).get("icon"));
+        mNameApp.setText(appInfos.get(position).get("title").toString());
+        mVersionApp.setText(appInfos.get(position).get("id").toString());
     }
 
     private void initView() {
@@ -230,20 +162,26 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                 startApp(packageName);
                 break;
             case R.id.tv_stop_app:
-                toast("已停止运行" + mAppInfo.getName());
-                if (mForceStopManager.canForceStop()){
-//                        onForceStopOk();
-//                        //Log.d(TGA, "getItemId : " + getItemId(position));
-//                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
-//                        //removeData(position);
-//                        Log.d(TGA, "delete");
-//                    //Intent intent = new Intent(this, StopRunActivity.class);
-//                    //intent.putExtra("position", position);
-//                    this.setResult(STOP_RUN);
-                    finish();
-                    }else {
-                        Log.d(TGA, "no delete");
-                    }
+//                toast("已停止运行" + mAppInfo.getName());
+//                if (mForceStopManager.canForceStop()){
+////                        onForceStopOk();
+////                        //Log.d(TGA, "getItemId : " + getItemId(position));
+////                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
+////                        //removeData(position);
+////                        Log.d(TGA, "delete");
+////                    //Intent intent = new Intent(this, StopRunActivity.class);
+////                    //intent.putExtra("position", position);
+////                    this.setResult(STOP_RUN);
+//                    finish();
+//                    }else {
+//                        Log.d(TGA, "no delete");
+//                    }
+
+                this.setResult(STOP_RUN);
+                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                Log.d("fengjw", "id : " + (int)appInfos.get(position).get("id"));
+                am.removeTask((int)appInfos.get(position).get("id"));
+                finish();
                 break;
             default:
                 break;

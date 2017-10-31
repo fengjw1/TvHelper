@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:clipChildren="false"
     android:focusable="false"
+    android:background="@drawable/home_bg"
     tools:context=".MainActivity">
 
     <HorizontalScrollView
@@ -41,16 +42,16 @@
                 android:textSize="20sp"/>
 
             <TextView
-                android:id="@+id/tv_stoprun"
+                android:id="@+id/tv_recenttask"
                 android:layout_width="290dp"
                 android:layout_height="446dp"
                 android:layout_margin="16dp"
                 android:layout_toRightOf="@+id/tv_update"
-                android:background="@color/coral"
-                android:focusable="true"
+                android:background="@color/darkgray"
                 android:focusableInTouchMode="true"
+                android:focusable="true"
                 android:gravity="center"
-                android:text="@string/tv_stoprun"
+                android:text="近期任务列表"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 
@@ -59,7 +60,7 @@
                 android:layout_width="290dp"
                 android:layout_height="446dp"
                 android:layout_margin="16dp"
-                android:layout_toRightOf="@+id/tv_stoprun"
+                android:layout_toRightOf="@+id/tv_recenttask"
                 android:background="@color/powderblue"
                 android:focusableInTouchMode="true"
                 android:focusable="true"
@@ -68,17 +69,19 @@
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 
+
+
             <TextView
-                android:id="@+id/tv_recenttask"
+                android:id="@+id/tv_stoprun"
                 android:layout_width="290dp"
                 android:layout_height="446dp"
                 android:layout_margin="16dp"
-                android:layout_toRightOf="@+id/tv_file"
-                android:background="@color/darkgray"
-                android:focusableInTouchMode="true"
+                android:background="@color/coral"
                 android:focusable="true"
+                android:layout_toRightOf="@+id/tv_file"
+                android:focusableInTouchMode="true"
                 android:gravity="center"
-                android:text="近期任务列表"
+                android:text="@string/tv_stoprun"
                 android:textColor="@color/white"
                 android:textSize="20sp"/>
 

@@ -210,13 +210,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
             intent.setClass(this, DownloadAllActivity.class);
             startActivity(intent);
         }else if (view == mLayout.getChildAt(1)){
-            intent.setClass(this, StopRunActivity.class);
+            intent.setClass(this, RecentTaskActivity.class);
             startActivity(intent);
         }else if (view == mLayout.getChildAt(2)){
             String pkgName = "com.ktc.filemanager";
             startApp(pkgName);
         }else if (view == mLayout.getChildAt(3)){
-            intent.setClass(this, RecentTaskActivity.class);
+            intent.setClass(this, StopRunActivity.class);
             startActivity(intent);
         }
     }

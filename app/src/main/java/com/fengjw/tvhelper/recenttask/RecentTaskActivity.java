@@ -16,19 +16,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
-
 import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.recenttask.adapter.RecentTaskAdapter;
 import com.fengjw.tvhelper.recenttask.utils.AppManagementActivity;
 
 import org.evilbinary.tv.widget.BorderView;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,10 +52,7 @@ public class RecentTaskActivity extends AppCompatActivity{
             switch (msg.what){
                 case REFRESH_UI:
                     Log.d(TAG, "handle");
-                    appInfos.remove(resultPosition);
-                    mAdapter.notifyItemRemoved(resultPosition);
-                    mAdapter.notifyDataSetChanged();
-                    //mRecentTaskRv.setAdapter(mAdapter);
+                    mAdapter.updateData(resultPosition);
                     break;
                 default:
                     break;
@@ -77,7 +67,6 @@ public class RecentTaskActivity extends AppCompatActivity{
         initView();
         BorderView border = new BorderView(this);
         border.setBackgroundResource(R.drawable.border_highlight);
-        //mString = getRecentList(this);
         reloadButtons(this, appInfos, 16);
         mAdapter = new RecentTaskAdapter(this, appInfos);
         mLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
@@ -92,50 +81,11 @@ public class RecentTaskActivity extends AppCompatActivity{
             @Override
             public void onItemClick(View view, int position) {
 
-//                try {
-//                    clearPkg((int)appInfos.get(position).get("id"));
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
-                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-                Log.d("fengjw", "id : " + (int)appInfos.get(position).get("id"));
-                am.removeTask((int)appInfos.get(position).get("id"));
-
-//                intent = new Intent(RecentTaskActivity.this, AppManagementActivity.class);
-//                intent.putExtra("packageName", appInfos.get(position).get("packageName").toString());
-//                //Bundle mBundle = new Bundle();
-//                //mBundle.put("tag", appInfos.get(position).get("tag"));
-//                //mBundle.putString("name", appInfos.get(position).get("packageName").toString());
-//                //intent.putExtras(mBundle);
-//                //startActivity(intent);
-//                resultPosition = position;
-//                startActivityForResult(intent, 1);
-//                Toast.makeText(RecentTaskActivity.this, appInfos.get(position).get("packageName").toString(), Toast.LENGTH_SHORT).show();
-//
-                //finish();
-
-//                final ActivityManager am = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
-//                String pkgName = appInfos.get(position).get("packageName").toString();
-//                Log.d("fengjw", "pkgName : " + pkgName);
-//                am.killBackgroundProcesses(pkgName);
-//                Log.d("fengjw", "kill");
-                //
-                //new MyActivityManager(RecentTaskActivity.this).clearRecentTasks();
-                //SystemServicesProxy ssp = RecentsTaskLoader.getInstance().getSystemServicesProxy();
-
-//                ActivityManager mAm;
-//                mAm = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-//                String pkgName = appInfos.get(position).get("packageName").toString();
-//                Log.d("fengjw", "pkgName : " + pkgName);
-//                mAm.killBackgroundProcesses(pkgName);
-                //Toast.makeText(mContext, "已清除进程的包名为："+packageName, 0).show();
-
-//                int id = (int)appInfos.get(position).get("id");
-//                try {
-//                    clearPkg(id);
-//                }catch (Exception e){
-//                    e.printStackTrace();
-//                }
+                intent = new Intent(RecentTaskActivity.this, AppManagementActivity.class);
+                intent.putExtra("packageName", appInfos.get(position).get("packageName").toString());
+                intent.putExtra("position", position);
+                resultPosition = position;
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -181,6 +131,8 @@ public class RecentTaskActivity extends AppCompatActivity{
         switch (resultCode){
             case STOP_RUN:
                 Log.d(TAG, "STOP_RUN");
+                //appInfos.remove(resultPosition);
+               // mAdapter = new RecentTaskAdapter(this, appInfos);
                 mHandler.sendEmptyMessage(REFRESH_UI);
                 break;
             case CONTINUE_RUN:
@@ -219,12 +171,6 @@ public class RecentTaskActivity extends AppCompatActivity{
                 .getRecentTasks(MAX_RECENT_TASKS + 1, 0x0002);
                 //.getRecentTasks(MAX_RECENT_TASKS + 1, 8);
 
-
-//        final List<ActivityManager.RunningTaskInfo> recentTaskInfos = am.getRunningTasks(20);
-//        Log.d("fengjw", "size : " + recentTaskInfos.size());
-//        for (int i = 0; i < recentTaskInfos.size(); i ++){
-//            Log.d("fengjw", recentTaskInfos.get(i).baseActivity.toString());
-//        }
 
         // 这个activity的信息是我们的launcher
         ActivityInfo homeInfo = new Intent(Intent.ACTION_MAIN).addCategory(
@@ -275,91 +221,6 @@ public class RecentTaskActivity extends AppCompatActivity{
         MAX_RECENT_TASKS = repeatCount;
     }
 
-    private void removeList() {
-        ActivityManager mAm;
-        HashMap<String, Object> singleAppInfo;
-        mAm = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        for (int i = 0; i < appInfos.size(); i++) {
-            singleAppInfo = appInfos.get(i);
-            Log.d(TAG, "title : " + singleAppInfo.get("title"));
-            Log.d(TAG, "packageName : " + singleAppInfo.get("packageName"));
-            mAm.killBackgroundProcesses(singleAppInfo.get("packageName").toString());
-            Toast.makeText(this, "已清除进程的包名为：" + singleAppInfo.get("packageName"),
-                    Toast.LENGTH_LONG).show();
-        }
 
-    }
-
-    private void getTaskApps(){
-        try {
-
-            ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-            appTasks = am.getAppTasks();
-            List<ActivityManager.RecentTaskInfo> recentTaskInfos ;
-            ActivityManager.RecentTaskInfo recentTaskInfo;
-            Log.d("fengjw", appTasks.size() + "");
-            for (int i = 0; i < appTasks.size(); i ++){
-                recentTaskInfo = appTasks.get(i).getTaskInfo();
-                //finishAndRemoveTask();
-                Log.d("fengjw", "baseActivity" + recentTaskInfo.baseActivity.toString());
-                Log.d("fengjw", "baseIntent" + recentTaskInfo.baseIntent.toString());
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
-
-    private void getRecentApps(){
-        final Context context = getApplication();
-        final ActivityManager am = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
-
-        List<ActivityManager.RunningServiceInfo> serviceInfoList = am.getRunningServices(10);
-        ActivityManager.RunningServiceInfo serviceInfo = serviceInfoList.get(0);
-
-    }
-
-    private static String getRecentList(Context context) {
-        ImageButton ivIcon;
-        am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        PackageManager pm = context.getPackageManager();
-        try {
-            //List<ActivityManager.RecentTaskInfo> list = am.getRecentTasks(64, 0);
-            list = am.getRecentTasks(64, ActivityManager.RECENT_IGNORE_UNAVAILABLE);
-            for (ActivityManager.RecentTaskInfo ti : list) {
-                Intent intent = ti.baseIntent;
-                ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
-                if (resolveInfo != null) {
-                    ivIcon = new ImageButton(context);
-                    ivIcon.setImageDrawable(resolveInfo.loadIcon(pm));
-                    ivIcon.setFocusable(true);
-                    ivIcon.setClickable(true);
-                    ivIcon.setEnabled(true);
-                    ivIcon.setScaleType(ImageView.ScaleType.CENTER);
-                    ivIcon.setLayoutParams(new LinearLayout.LayoutParams(120, 120));
-                    apps = apps.equals("") ? resolveInfo.loadLabel(pm) + "" : apps + "," + resolveInfo.loadLabel(pm);
-                }
-            }
-            return apps;
-        } catch (SecurityException se) {
-            se.printStackTrace();
-            return apps;
-        }
-    }
-
-    private void clearPkg(int persistentId) throws ClassNotFoundException,NoSuchMethodException,
-            IllegalAccessException,InvocationTargetException{
-        Class<?> activityManagerClass = Class.forName("android.app.ActivityManager");
-        ActivityManager mActivityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        Log.d("fengjw", "clearPkg");
-        Method mRemoveTask = activityManagerClass.getMethod("removeTask",
-                new Class[] { int.class});
-        mRemoveTask.setAccessible(true);
-        mRemoveTask.invoke(persistentId);
-        Log.d("fengjw", "clearAll");
-
-
-    }
 
 }

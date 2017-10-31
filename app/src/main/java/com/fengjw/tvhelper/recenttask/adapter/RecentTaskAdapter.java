@@ -56,6 +56,11 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
         return viewHolder;
     }
 
+    public void updateData(int position){
+        mAppInfos.remove(position);
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         Log.d(TAG, "positon = " + position);
