@@ -14,7 +14,6 @@
         android:background="@drawable/home_bg"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:layout_margin="20dp"
         android:clipToPadding="false"
         tools:listitem="@layout/item_listview_new"/>
 </LinearLayout>

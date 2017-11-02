@@ -26,6 +26,7 @@ public class AnimateFactory {
         return anim;
     }
 
+
     public static Animation shakeAnimate() {
         TranslateAnimation mAnimate = new TranslateAnimation(0, 5, 0, 0);
         mAnimate.setInterpolator(new CycleInterpolator(50));

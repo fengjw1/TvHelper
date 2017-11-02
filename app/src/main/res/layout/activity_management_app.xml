@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@drawable/home_bg"
               android:orientation="horizontal"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -56,6 +57,7 @@
                 android:layout_margin="10dp"
                 android:text="版本"
                 android:textSize="28sp"
+                android:visibility="gone"
                 android:textColor="@color/navajowhite"
                 />
         </LinearLayout>

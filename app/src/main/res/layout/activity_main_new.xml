@@ -5,10 +5,14 @@
     android:layout_gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/home_bg"
     android:clipChildren="false"
     android:focusable="false"
-    android:background="@drawable/home_bg"
     tools:context=".MainActivity">
+
+    <!--
+    android:background="@drawable/home_bg"
+     -->
 
     <HorizontalScrollView
         android:layout_width="match_parent"
