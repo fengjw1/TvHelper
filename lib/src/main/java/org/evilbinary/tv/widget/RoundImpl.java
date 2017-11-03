@@ -43,7 +43,7 @@ public class RoundImpl {
 
 
         mPaint = new Paint();
-        mPaint.setColor(Color.WHITE);
+        //mPaint.setColor(Color.WHITE);//这里是调整颜色的
         mPaint.setAntiAlias(true);
         mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
         mPath = new Path();

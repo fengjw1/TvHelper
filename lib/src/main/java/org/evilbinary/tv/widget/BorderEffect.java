@@ -32,7 +32,7 @@ public class BorderEffect implements Effect {
     protected boolean mScalable = true;
     protected float mScale = 1.1f;
 
-    protected long mDurationTraslate = 200;
+    protected long mDurationTraslate = 20; //这是平移速度
     protected int mMargin = 0;
     protected View lastFocus, oldLastFocus;
     protected AnimatorSet mAnimatorSet;
@@ -525,7 +525,7 @@ public class BorderEffect implements Effect {
                                 if (lastFocus != null) {
                                     List<Animator> list = getScaleAnimator(lastFocus, false);
                                     AnimatorSet animatorSet = new AnimatorSet();
-                                    animatorSet.setDuration(150);
+                                    animatorSet.setDuration(20);
                                     animatorSet.playTogether(list);
                                     animatorSet.start();
                                 }

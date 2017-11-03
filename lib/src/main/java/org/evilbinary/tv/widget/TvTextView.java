@@ -57,7 +57,7 @@ public class TvTextView extends TextView implements View.OnFocusChangeListener {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setTextSize(25);
-        mPaint.setColor(numberColor);
+        //mPaint.setColor(numberColor); //这里是边框颜色
 
         a.recycle();
 

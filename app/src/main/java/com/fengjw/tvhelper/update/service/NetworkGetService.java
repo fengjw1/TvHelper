@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.fengjw.tvhelper.update.PushDialogActivity;
 import com.fengjw.tvhelper.update.utils.ApkModel;
@@ -350,6 +351,7 @@ public class NetworkGetService extends Service {
         }catch (Exception e) {
             e.printStackTrace();
             Log.d(TGA, "安装失败1");
+            stopSelf();
         }
     }
 
@@ -364,6 +366,7 @@ public class NetworkGetService extends Service {
             } else {
                 //Toast.makeText(NetworkGetService.this, "安装失败！", Toast.LENGTH_SHORT).show();
                 Log.d(TGA, "安装失败！");
+                stopSelf();
             }
         }
     }
@@ -398,16 +401,19 @@ public class NetworkGetService extends Service {
 
         @Override
         public void onFinish(File file, Progress progress) {
-//            Toast.makeText(NetworkGetService.this, "下载完成:" + progress.filePath,
+            try {
+                //Toast.makeText(NetworkGetService.this, "下载完成:" + progress.filePath,
 //                    Toast.LENGTH_SHORT).show();
-            Log.d(TGA, progress.filePath);
-            //ApkUtils.install(getApplicationContext(), new File(progress.filePath));
-            //mDownloadTask.remove(true);
-            installPackage(progress.filePath);
-            //mDownloadTask.remove();
-            Log.d(TGA, "从installPackage退出了！");
-            //stopSelf();
-
+                        Log.d(TGA, progress.filePath);
+                //ApkUtils.install(getApplicationContext(), new File(progress.filePath));
+                //mDownloadTask.remove(true);
+                installPackage(progress.filePath);
+                //mDownloadTask.remove();
+                Log.d(TGA, "从installPackage退出了！");
+                //stopSelf();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
 
         @Override
