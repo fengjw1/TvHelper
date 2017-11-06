@@ -202,18 +202,18 @@ public class NetworkGetService extends Service {
             HeadBean bean = gson.fromJson(responseData, HeadBean.class);
             List<HeadBean.ApklistBean> appList = bean.getApklist();
 
-//            for (HeadBean.ApklistBean app : appList){ //foreach()
-//                Log.d(TGA, "appName : " + app.getApp_name());
-//                Log.d(TGA, "fileName : " + app.getFile_name());
-//                Log.d(TGA, "verName : " + app.getVer_name());
-//                Log.d(TGA, "verCode : " + app.getVer_code());
-//                Log.d(TGA, "url : " + app.getApk_url());
-//                Log.d(TGA, "MD5 : " + app.getMD5());
-//                Log.d(TGA, "packageName : " + app.getPkg_name());
-//                Log.d(TGA, "type : " + app.getUpdate_type());
-//                Log.d(TGA, "Introduction : " + app.getIntroduction());
-//                Log.d(TGA, "-----------------------------------------");
-//            }
+            for (HeadBean.ApklistBean app : appList){ //foreach()
+                Log.d(TGA, "appName : " + app.getApp_name());
+                Log.d(TGA, "fileName : " + app.getFile_name());
+                Log.d(TGA, "verName : " + app.getVer_name());
+                Log.d(TGA, "verCode : " + app.getVer_code());
+                Log.d(TGA, "url : " + app.getApk_url());
+                Log.d(TGA, "MD5 : " + app.getMD5());
+                Log.d(TGA, "packageName : " + app.getPkg_name());
+                Log.d(TGA, "type : " + app.getUpdate_type());
+                Log.d(TGA, "Introduction : " + app.getIntroduction());
+                Log.d(TGA, "-----------------------------------------");
+            }
 
             //本地信息
             AppInfoProvider appInfoProvider = new AppInfoProvider(this);

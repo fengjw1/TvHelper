@@ -54,14 +54,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new);
 
-        try {
-            /*
-            如果这里不执行一次，那么后面的activity无法直接获取完整的列表，具体不清楚原因。
-             */
-            init();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            /*
+//            如果这里不执行一次，那么后面的activity无法直接获取完整的列表，具体不清楚原因。
+//             */
+//            init();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
         BorderView border = new BorderView(this);
         border.setBackgroundResource(R.drawable.border_highlight);
@@ -74,18 +74,18 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     }
 
-    private void cinFile(){
-        Log.d(TGA, "str_write : " + str_write);
-        try { //放置到文件中
-            mXml.writeSDFile(fileName, str_write);
-        }catch (IOException e){
-            e.printStackTrace();
-            Log.d(TGA, e.getMessage());
-        }catch (Exception e){
-            e.printStackTrace();
-            Log.d(TGA, e.getMessage());
-        }
-    }
+//    private void cinFile(){
+//        Log.d(TGA, "str_write : " + str_write);
+//        try { //放置到文件中
+//            mXml.writeSDFile(fileName, str_write);
+//        }catch (IOException e){
+//            e.printStackTrace();
+//            Log.d(TGA, e.getMessage());
+//        }catch (Exception e){
+//            e.printStackTrace();
+//            Log.d(TGA, e.getMessage());
+//        }
+//    }
 
     @Override
     protected void onResume() {
@@ -113,95 +113,95 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //        }
     }
 
-    private void init(){
-        try {
-            mXml = new DomXml(this);
-            mFilters = mXml.XMLResolve();
-            mApplicationsState = ApplicationsState.getInstance(getApplication());
-
-            mAppsInfo = new AppsInfo(this);
-            mAppInfoList = new ArrayList<>();
-            Log.d(TGA, "Enter mAppInfo");
-            mAppsInfo.init();
-            mList = mAppsInfo.rebuildRunning();
-
-            Log.d(TGA, "mList Size is " + mList.size());
-            for (ApplicationsState.AppEntry appEntry : mList){
-                try {
-                    StopAppInfo appInfo = new StopAppInfo(this, appEntry);
-                    mAppInfoList.add(appInfo);
-                }catch (Exception e){
-                    Log.d(TGA, e.getMessage());
-                    e.printStackTrace();
-                }
-            }
-            for (StopAppInfo appInfo : mAppInfoList){
-                str_write += " " + appInfo.getName() + " : " + appInfo.getPackageName() + "\n";
-//                Log.d(TGA, "appInfo: name =" + appInfo.getName()
-//                        + " CacheSize =" + appInfo.getCacheSize()
-//                        + " DateSize =" + appInfo.getDataSize()
-//                        + " Size =" + appInfo.getSize()
-//                        + " Version =" + appInfo.getVersion());
-            }
-
-            //xml 过滤
-            for (int i = 0; i < mAppInfoList.size(); i ++) {
-                for (int j = 0; j < mFilters.size(); j ++) {
-                    if (mFilters.get(j).getName().equals(mAppInfoList.get(i).getPackageName())){
-                        mAppInfoList.remove(i);
-                        Log.d(TGA, "remove pkgName : " + mAppInfoList.get(i).getPackageName());
-                    }
-//                    if (mFilters[j].getName().equals(info.getPackageName())){
-//                        mAppInfoList.remove(info);
-//                        Log.d(TGA, "remove : " + info.getPackageName());
-//                    }else {
-//                        Log.d(TGA, "filter name = " + filter.getName() + "  "
-//                                + "info.getPackageName = " + info.getPackageName());
+//    private void init(){
+//        try {
+//            mXml = new DomXml(this);
+//            mFilters = mXml.XMLResolve();
+//            mApplicationsState = ApplicationsState.getInstance(getApplication());
+//
+//            mAppsInfo = new AppsInfo(this);
+//            mAppInfoList = new ArrayList<>();
+//            Log.d(TGA, "Enter mAppInfo");
+//            mAppsInfo.init();
+//            mList = mAppsInfo.rebuildRunning();
+//
+//            Log.d(TGA, "mList Size is " + mList.size());
+//            for (ApplicationsState.AppEntry appEntry : mList){
+//                try {
+//                    StopAppInfo appInfo = new StopAppInfo(this, appEntry);
+//                    mAppInfoList.add(appInfo);
+//                }catch (Exception e){
+//                    Log.d(TGA, e.getMessage());
+//                    e.printStackTrace();
+//                }
+//            }
+//            for (StopAppInfo appInfo : mAppInfoList){
+//                str_write += " " + appInfo.getName() + " : " + appInfo.getPackageName() + "\n";
+////                Log.d(TGA, "appInfo: name =" + appInfo.getName()
+////                        + " CacheSize =" + appInfo.getCacheSize()
+////                        + " DateSize =" + appInfo.getDataSize()
+////                        + " Size =" + appInfo.getSize()
+////                        + " Version =" + appInfo.getVersion());
+//            }
+//
+//            //xml 过滤
+//            for (int i = 0; i < mAppInfoList.size(); i ++) {
+//                for (int j = 0; j < mFilters.size(); j ++) {
+//                    if (mFilters.get(j).getName().equals(mAppInfoList.get(i).getPackageName())){
+//                        mAppInfoList.remove(i);
+//                        Log.d(TGA, "remove pkgName : " + mAppInfoList.get(i).getPackageName());
 //                    }
-                }
-            }
+////                    if (mFilters[j].getName().equals(info.getPackageName())){
+////                        mAppInfoList.remove(info);
+////                        Log.d(TGA, "remove : " + info.getPackageName());
+////                    }else {
+////                        Log.d(TGA, "filter name = " + filter.getName() + "  "
+////                                + "info.getPackageName = " + info.getPackageName());
+////                    }
+//                }
+//            }
+//
+//            cinFile();
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 
-            cinFile();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        Log.d(TGA, "onKeyDown");
+//        if (keyCode == KeyEvent.KEYCODE_BACK){
+//            try {
+//                if (mAppInfoList.size() > 0) {
+//                    mInfo = mAppInfoList.get(mAppInfoList.size() - 1);
+//                }else {
+//                    mInfo = mAppInfoList.get(0);
+//                }
+//                Log.d(TGA, "mAppInfoList.size() : " + mAppInfoList.size());
+//                Log.d(TGA, "mInfo.getName : " + mInfo.getPackageName());
+//                if (mInfo.getPackageName().equals("com.fengjw.tvhelper")){
+//                    mForceStopManager = new ForceStopManager(this, mInfo);
+//                    if (mForceStopManager.canForceStop()) {
+//                        onForceStopOk();
+//                    }
+//                }else {
+//                    Log.d(TGA, "自身没有加载出来");
+//                }
+//                Log.d(TGA, "back!");
+//                Toast.makeText(this, "back!", Toast.LENGTH_SHORT).show();
+//            }catch (Exception e){
+//                e.printStackTrace();
+//            }
+//            //return false;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        Log.d(TGA, "onKeyDown");
-        if (keyCode == KeyEvent.KEYCODE_BACK){
-            try {
-                if (mAppInfoList.size() > 0) {
-                    mInfo = mAppInfoList.get(mAppInfoList.size() - 1);
-                }else {
-                    mInfo = mAppInfoList.get(0);
-                }
-                Log.d(TGA, "mAppInfoList.size() : " + mAppInfoList.size());
-                Log.d(TGA, "mInfo.getName : " + mInfo.getPackageName());
-                if (mInfo.getPackageName().equals("com.fengjw.tvhelper")){
-                    mForceStopManager = new ForceStopManager(this, mInfo);
-                    if (mForceStopManager.canForceStop()) {
-                        onForceStopOk();
-                    }
-                }else {
-                    Log.d(TGA, "自身没有加载出来");
-                }
-                Log.d(TGA, "back!");
-                Toast.makeText(this, "back!", Toast.LENGTH_SHORT).show();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            //return false;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    private void onForceStopOk() {
-        mForceStopManager.forceStop(mApplicationsState);
-        Log.d(TGA, "onForceStopOK");
-        //onBackPressed();
-    }
+//    private void onForceStopOk() {
+//        mForceStopManager.forceStop(mApplicationsState);
+//        Log.d(TGA, "onForceStopOK");
+//        //onBackPressed();
+//    }
 
     @Override
     public void onClick(View view) {
@@ -215,10 +215,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }else if (view == mLayout.getChildAt(2)){
             String pkgName = "com.ktc.filemanager";
             startApp(pkgName);
-        }else if (view == mLayout.getChildAt(3)){
-            intent.setClass(this, StopRunActivity.class);
-            startActivity(intent);
         }
+//        else if (view == mLayout.getChildAt(3)){
+//            intent.setClass(this, StopRunActivity.class);
+//            startActivity(intent);
+//        }
     }
 
     public void startApp(String appPackageName){

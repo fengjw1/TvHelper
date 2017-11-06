@@ -75,19 +75,19 @@
 
 
 
-            <TextView
-                android:id="@+id/tv_stoprun"
-                android:layout_width="290dp"
-                android:layout_height="446dp"
-                android:layout_margin="16dp"
-                android:background="@color/coral"
-                android:focusable="true"
-                android:layout_toRightOf="@+id/tv_file"
-                android:focusableInTouchMode="true"
-                android:gravity="center"
-                android:text="@string/tv_stoprun"
-                android:textColor="@color/white"
-                android:textSize="20sp"/>
+            <!--<TextView-->
+                <!--android:id="@+id/tv_stoprun"-->
+                <!--android:layout_width="290dp"-->
+                <!--android:layout_height="446dp"-->
+                <!--android:layout_margin="16dp"-->
+                <!--android:background="@color/coral"-->
+                <!--android:focusable="true"-->
+                <!--android:layout_toRightOf="@+id/tv_file"-->
+                <!--android:focusableInTouchMode="true"-->
+                <!--android:gravity="center"-->
+                <!--android:text="@string/tv_stoprun"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:textSize="20sp"/>-->
 
         </RelativeLayout>
 

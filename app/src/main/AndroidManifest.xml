@@ -65,20 +65,20 @@
             android:exported="true">
         </service>
 
-        <activity
-            android:name=".stop.StopRunningActivity"
-            android:launchMode="singleInstance">
-        </activity>
-        <activity
-            android:name=".stop.DetailActivity"
-            android:launchMode="singleInstance"
-            android:theme="@style/AppTheme.Dialog"/>
-        <activity
-            android:name=".stop.StopRunActivity"
-            android:launchMode="singleInstance">
-        </activity>
-        <activity android:name=".stop.AppManagementActivity">
-        </activity>
+        <!--<activity-->
+            <!--android:name=".stop.StopRunningActivity"-->
+            <!--android:launchMode="singleInstance">-->
+        <!--</activity>-->
+        <!--<activity-->
+            <!--android:name=".stop.DetailActivity"-->
+            <!--android:launchMode="singleInstance"-->
+            <!--android:theme="@style/AppTheme.Dialog"/>-->
+        <!--<activity-->
+            <!--android:name=".stop.StopRunActivity"-->
+            <!--android:launchMode="singleInstance">-->
+        <!--</activity>-->
+        <!--<activity android:name=".stop.AppManagementActivity">-->
+        <!--</activity>-->
         <activity android:name=".recenttask.RecentTaskActivity"
                   android:launchMode="singleInstance">
         </activity>

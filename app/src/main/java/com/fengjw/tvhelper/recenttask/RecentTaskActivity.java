@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -70,11 +71,12 @@ public class RecentTaskActivity extends AppCompatActivity{
         reloadButtons(this, appInfos, 16);
         mAdapter = new RecentTaskAdapter(this, appInfos);
         mLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
-        mRecentTaskRv.setLayoutManager(mLayoutManager);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        mRecentTaskRv.setLayoutManager(layoutManager);
         border.attachTo(mRecentTaskRv);
         mRecentTaskRv.setFocusable(false);
         mRecentTaskRv.setAdapter(mAdapter);
-        mRecentTaskRv.scrollToPosition(0);
+        //mRecentTaskRv.scrollToPosition(0);
 
 
         mAdapter.setOnItemClickListener(new RecentTaskAdapter.OnItemClickListener() {
