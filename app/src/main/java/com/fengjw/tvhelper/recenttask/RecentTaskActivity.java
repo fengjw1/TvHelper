@@ -20,9 +20,7 @@ import android.view.View;
 import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.recenttask.adapter.RecentTaskAdapter;
 import com.fengjw.tvhelper.recenttask.utils.AppManagementActivity;
-
 import org.evilbinary.tv.widget.BorderView;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +43,6 @@ public class RecentTaskActivity extends AppCompatActivity{
     private List<HashMap<String, Object>> appInfos = new ArrayList<HashMap<String, Object>>();
     private RecyclerView mRecentTaskRv;
     private RecentTaskAdapter mAdapter;
-
 
     private Handler mHandler = new Handler(){
         @Override
@@ -77,7 +74,6 @@ public class RecentTaskActivity extends AppCompatActivity{
         mRecentTaskRv.setFocusable(false);
         mRecentTaskRv.setAdapter(mAdapter);
         //mRecentTaskRv.scrollToPosition(0);
-
 
         mAdapter.setOnItemClickListener(new RecentTaskAdapter.OnItemClickListener() {
             @Override
@@ -145,7 +141,6 @@ public class RecentTaskActivity extends AppCompatActivity{
         }
 
     }
-
 
     /**
      * 核心方法，加载最近启动的应用程序 注意：这里我们取出的最近任务为 MAX_RECENT_TASKS +

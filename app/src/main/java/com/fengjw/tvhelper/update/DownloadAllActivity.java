@@ -19,20 +19,33 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.IPackageInstallObserver;
+import android.content.pm.IPackageInstallObserver2;
+import android.content.pm.IPackageManager;
+import android.content.pm.VerificationParams;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.Message;
+import android.os.RemoteException;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.update.adapter.DownloadAdapter;
+import com.fengjw.tvhelper.update.service.NetworkGetService;
 import com.lzy.okserver.OkDownload;
 import com.lzy.okserver.download.DownloadTask;
 import com.lzy.okserver.task.XExecutor;
+
+import java.io.File;
+import java.lang.reflect.Method;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -107,7 +120,65 @@ public class DownloadAllActivity extends BaseActivity implements XExecutor.OnAll
         recyclerView.setAdapter(adapter);
         okDownload.addOnAllTaskEndListener(this);
 
+        //test
+        Button test = (Button) findViewById(R.id.btn_test);
+        test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("fengjw", "onClick!");
+                String strPath = "/sdcard/signed.apk";
+                installPackage(strPath);
+            }
+        });
+
+
     }
+
+
+    public void installPackage(String apkPath)
+    {
+        DownloadAllActivity.PackageInstallObserver2 installObserver2 = new DownloadAllActivity.PackageInstallObserver2();
+        try {
+            Class<?> ServiceManager = Class.forName("android.os.ServiceManager");
+            Method getService = ServiceManager.getDeclaredMethod("getService", String.class);
+            getService.setAccessible(true);
+            IBinder packAgeBinder = (IBinder) getService.invoke(null, "package");
+            IPackageManager iPm = IPackageManager.Stub.asInterface(packAgeBinder);
+            VerificationParams verificationParams=new VerificationParams();
+            try {
+                Log.i("fengjw", "1");
+                iPm.installPackage(apkPath, installObserver2,2,
+                        new File(apkPath).getPath(),verificationParams,null);
+                Log.i("fengjw", "2");
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            Log.d("fengjw", "安装失败1");
+            //stopSelf();
+        }
+    }
+
+
+    public class PackageInstallObserver2 extends IPackageInstallObserver2.Stub {
+
+        @Override
+        public void packageInstalled(String packageName, int returnCode) throws RemoteException {
+            if (returnCode == 1) //返回1表示安装成功，否则安装失败
+            {
+                //Toast.makeText(NetworkGetService.this, "安装成功！", Toast.LENGTH_SHORT).show();
+                Log.e(TGA, "packageName=" + packageName + ",returnCode=" + returnCode);
+            } else {
+                //Toast.makeText(NetworkGetService.this, "安装失败！", Toast.LENGTH_SHORT).show();
+                Log.d(TGA, "安装失败！");
+                //stopSelf();
+            }
+        }
+    }
+
+
 
     @Override
     protected void onStart() {

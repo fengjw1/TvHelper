@@ -2,31 +2,27 @@ package com.fengjw.tvhelper;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Environment;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.KeyEvent;
+import android.os.Environment;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.settingslib.applications.ApplicationsState;
 import com.fengjw.tvhelper.recenttask.RecentTaskActivity;
-import com.fengjw.tvhelper.stop.StopRunActivity;
 import com.fengjw.tvhelper.stop.utils.AppsInfo;
 import com.fengjw.tvhelper.stop.utils.DomXml;
 import com.fengjw.tvhelper.stop.utils.Filter;
 import com.fengjw.tvhelper.stop.utils.ForceStopManager;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
 import com.fengjw.tvhelper.update.DownloadAllActivity;
+import com.fengjw.tvhelper.update.utils.AppInfo;
+import com.fengjw.tvhelper.update.utils.AppInfoProvider;
 
 import org.evilbinary.tv.widget.BorderView;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
 
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -48,11 +44,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private DomXml mXml;
     private String str_write;
     private List<Filter> mFilters;
+    private TextView mUpdateTv;
+    private TextView mRecenttaskTv;
+    private TextView mFileTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new);
+        initView();
 
 //        try {
 //            /*
@@ -65,13 +65,32 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         BorderView border = new BorderView(this);
         border.setBackgroundResource(R.drawable.border_highlight);
-        mLayout  = (RelativeLayout) findViewById(R.id.main);
+        mLayout = (RelativeLayout) findViewById(R.id.main);
         border.attachTo(mLayout);
 
-        for (int i = 0; i < mLayout.getChildCount(); i ++){
+        for (int i = 0; i < mLayout.getChildCount(); i++) {
             mLayout.getChildAt(i).setOnClickListener(this);
         }
 
+    }
+
+    private void initView() {
+        mUpdateTv = (TextView) findViewById(R.id.tv_update);
+        mRecenttaskTv = (TextView) findViewById(R.id.tv_recenttask);
+        mFileTv = (TextView) findViewById(R.id.tv_file);
+        //本地信息
+        int RESULT = 0;
+        AppInfoProvider appInfoProvider = new AppInfoProvider(this);
+        List<AppInfo> appInfoList = appInfoProvider.getAllApps();
+        for (AppInfo appInfo : appInfoList){
+            if (appInfo.getPkg_name().equals("com.ktc.filemanager")){
+                RESULT = 1;
+                break;
+            }
+        }
+        if (RESULT == 0){
+            mFileTv.setVisibility(View.GONE);
+        }
     }
 
 //    private void cinFile(){
@@ -206,13 +225,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         Intent intent = new Intent();
-        if (view == mLayout.getChildAt(0)){
+        if (view == mLayout.getChildAt(0)) {
             intent.setClass(this, DownloadAllActivity.class);
             startActivity(intent);
-        }else if (view == mLayout.getChildAt(1)){
+        } else if (view == mLayout.getChildAt(1)) {
             intent.setClass(this, RecentTaskActivity.class);
             startActivity(intent);
-        }else if (view == mLayout.getChildAt(2)){
+        } else if (view == mLayout.getChildAt(2)) {
             String pkgName = "com.ktc.filemanager";
             startApp(pkgName);
         }
@@ -222,12 +241,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //        }
     }
 
-    public void startApp(String appPackageName){
+    public void startApp(String appPackageName) {
         try {
             Intent intent = getPackageManager().getLaunchIntentForPackage(appPackageName);
             startActivity(intent);
             //finish();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(this, "文件管理未安装！", Toast.LENGTH_SHORT).show();
         }
