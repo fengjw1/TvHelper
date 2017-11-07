@@ -79,16 +79,29 @@ public class MainActivity extends Activity implements View.OnClickListener {
         mRecenttaskTv = (TextView) findViewById(R.id.tv_recenttask);
         mFileTv = (TextView) findViewById(R.id.tv_file);
         //本地信息
-        int RESULT = 0;
+        int RESULT_UPDATE = 0;
+        int RESULT_FILE = 0;
         AppInfoProvider appInfoProvider = new AppInfoProvider(this);
         List<AppInfo> appInfoList = appInfoProvider.getAllApps();
         for (AppInfo appInfo : appInfoList){
             if (appInfo.getPkg_name().equals("com.ktc.filemanager")){
-                RESULT = 1;
+                RESULT_FILE = 1;
                 break;
             }
         }
-        if (RESULT == 0){
+
+        for (AppInfo appInfo : appInfoList){
+            if (appInfo.getPkg_name().equals("com.fengjw.apkupdatetool")){
+                RESULT_UPDATE = 1;
+                break;
+            }
+        }
+
+        if (RESULT_UPDATE == 0){
+            mUpdateTv.setVisibility(View.GONE);
+        }
+
+        if (RESULT_FILE == 0){
             mFileTv.setVisibility(View.GONE);
         }
     }
@@ -226,8 +239,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         Intent intent = new Intent();
         if (view == mLayout.getChildAt(0)) {
-            intent.setClass(this, DownloadAllActivity.class);
-            startActivity(intent);
+            //intent.setClass(this, DownloadAllActivity.class);
+            //startActivity(intent);
+            String pkgName = "com.fengjw.apkupdatetool";
+            startApp(pkgName);
         } else if (view == mLayout.getChildAt(1)) {
             intent.setClass(this, RecentTaskActivity.class);
             startActivity(intent);

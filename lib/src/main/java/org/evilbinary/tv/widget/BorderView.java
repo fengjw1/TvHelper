@@ -137,7 +137,6 @@ public class BorderView<X extends View> implements ViewTreeObserver.OnGlobalFocu
             }
 
             if (mViewGroup != viewGroup) {
-
                 ViewTreeObserver viewTreeObserver = viewGroup.getViewTreeObserver();
                 if (viewTreeObserver.isAlive() && mViewGroup == null) {
                     viewTreeObserver.addOnGlobalFocusChangeListener(this);

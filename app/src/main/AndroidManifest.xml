@@ -24,8 +24,9 @@
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"/>
     <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"/>
 
+    <!-- android:name=".update.utils.GApp" -->
+
     <application
-        android:name=".update.utils.GApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -36,34 +37,33 @@
                     android:excludeFromRecents="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".update.DownloadAllActivity"/>
-        <activity
-            android:name=".update.PushDialogActivity"
-            android:theme="@style/AppTheme.Dialog"
-            android:excludeFromRecents="true"/>
+        <!--<activity android:name=".update.DownloadAllActivity"/>-->
+        <!--<activity-->
+            <!--android:name=".update.PushDialogActivity"-->
+            <!--android:theme="@style/AppTheme.Dialog"-->
+            <!--android:excludeFromRecents="true"/>-->
 
-        <receiver android:name=".update.service.NetworkStateReceiver">
-            <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".update.service.BootBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+        <!--<receiver android:name=".update.service.NetworkStateReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
+        <!--<receiver android:name=".update.service.BootBroadcastReceiver">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.BOOT_COMPLETED"/>-->
 
-                <category android:name="android.intent.category.HOME"/>
-            </intent-filter>
-        </receiver>
+                <!--<category android:name="android.intent.category.HOME"/>-->
+            <!--</intent-filter>-->
+        <!--</receiver>-->
 
-        <service
-            android:name=".update.service.NetworkGetService"
-            android:enabled="true"
-            android:exported="true">
-        </service>
+        <!--<service-->
+            <!--android:name=".update.service.NetworkGetService"-->
+            <!--android:enabled="true"-->
+            <!--android:exported="true">-->
+        <!--</service>-->
 
         <!--<activity-->
             <!--android:name=".stop.StopRunningActivity"-->
