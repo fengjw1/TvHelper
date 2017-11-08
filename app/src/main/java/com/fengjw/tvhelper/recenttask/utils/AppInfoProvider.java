@@ -1,4 +1,4 @@
-package com.fengjw.tvhelper.update.utils;
+package com.fengjw.tvhelper.recenttask.utils;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;

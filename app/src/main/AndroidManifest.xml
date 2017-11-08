@@ -40,45 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <!--<activity android:name=".update.DownloadAllActivity"/>-->
-        <!--<activity-->
-            <!--android:name=".update.PushDialogActivity"-->
-            <!--android:theme="@style/AppTheme.Dialog"-->
-            <!--android:excludeFromRecents="true"/>-->
 
-        <!--<receiver android:name=".update.service.NetworkStateReceiver">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-        <!--<receiver android:name=".update.service.BootBroadcastReceiver">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.BOOT_COMPLETED"/>-->
-
-                <!--<category android:name="android.intent.category.HOME"/>-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-
-        <!--<service-->
-            <!--android:name=".update.service.NetworkGetService"-->
-            <!--android:enabled="true"-->
-            <!--android:exported="true">-->
-        <!--</service>-->
-
-        <!--<activity-->
-            <!--android:name=".stop.StopRunningActivity"-->
-            <!--android:launchMode="singleInstance">-->
-        <!--</activity>-->
-        <!--<activity-->
-            <!--android:name=".stop.DetailActivity"-->
-            <!--android:launchMode="singleInstance"-->
-            <!--android:theme="@style/AppTheme.Dialog"/>-->
-        <!--<activity-->
-            <!--android:name=".stop.StopRunActivity"-->
-            <!--android:launchMode="singleInstance">-->
-        <!--</activity>-->
-        <!--<activity android:name=".stop.AppManagementActivity">-->
-        <!--</activity>-->
         <activity android:name=".recenttask.RecentTaskActivity"
                   android:launchMode="singleInstance">
         </activity>

@@ -30,7 +30,6 @@ android {
 
 dependencies {
     provided files('libs/framework.jar')
-    compile files('libs/classes.jar')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

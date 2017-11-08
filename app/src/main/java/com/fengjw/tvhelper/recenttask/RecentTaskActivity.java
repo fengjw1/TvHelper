@@ -13,16 +13,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.ScaleAnimation;
-
 import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.recenttask.adapter.RecentTaskAdapter;
 import com.fengjw.tvhelper.recenttask.utils.AppManagementActivity;
@@ -93,30 +87,6 @@ public class RecentTaskActivity extends AppCompatActivity{
                 startActivityForResult(intent, 1);
             }
         });
-
-//        mRecentTaskRv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = (Intent)view.getTag();
-//                Log.d("fengjw", "click");
-//                if (intent != null) {
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
-//                    try {
-//                        startActivity(intent);
-//                    }
-//                    catch (ActivityNotFoundException e) {
-//                        Log.d("fengjw", "Unable to launch recent task", e);
-//                    }
-//                }else {
-//                    Log.d("fengjw", "intent is null!");
-//                }
-//
-//            }
-//        });
-
-
-        //Log.d(TAG, "mString : " + mString);
-        //mShowTv.setText(mString);
     }
 
 
