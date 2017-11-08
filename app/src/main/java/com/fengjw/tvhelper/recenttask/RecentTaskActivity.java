@@ -13,14 +13,19 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.ScaleAnimation;
+
 import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.recenttask.adapter.RecentTaskAdapter;
 import com.fengjw.tvhelper.recenttask.utils.AppManagementActivity;
-import org.evilbinary.tv.widget.BorderView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -63,22 +68,24 @@ public class RecentTaskActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent_task);
         initView();
-        BorderView border = new BorderView(this);
-        border.setBackgroundResource(R.drawable.border_highlight);
+        //BorderView border = new BorderView(this);
+        //border.setBackgroundResource(R.drawable.border_highlight);
         reloadButtons(this, appInfos, 16);
         mAdapter = new RecentTaskAdapter(this, appInfos);
-        mLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+        //mLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 5);
         mRecentTaskRv.setLayoutManager(layoutManager);
-        border.attachTo(mRecentTaskRv);
+        //border.attachTo(mRecentTaskRv);
         mRecentTaskRv.setFocusable(false);
         mRecentTaskRv.setAdapter(mAdapter);
         //mRecentTaskRv.scrollToPosition(0);
 
+        //mRecentTaskRv.setOnFocusChangeListener(new HomeFocusListener());
+
+
         mAdapter.setOnItemClickListener(new RecentTaskAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
                 intent = new Intent(RecentTaskActivity.this, AppManagementActivity.class);
                 intent.putExtra("packageName", appInfos.get(position).get("packageName").toString());
                 intent.putExtra("position", position);
@@ -111,6 +118,8 @@ public class RecentTaskActivity extends AppCompatActivity{
         //Log.d(TAG, "mString : " + mString);
         //mShowTv.setText(mString);
     }
+
+
 
     private void initView() {
         mRecentTaskRv = (RecyclerView) findViewById(R.id.rv_recent_task);

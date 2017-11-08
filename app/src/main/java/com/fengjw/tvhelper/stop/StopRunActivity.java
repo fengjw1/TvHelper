@@ -21,13 +21,8 @@ import com.fengjw.tvhelper.stop.utils.AppsInfo;
 import com.fengjw.tvhelper.stop.utils.DomXml;
 import com.fengjw.tvhelper.stop.utils.Filter;
 import com.fengjw.tvhelper.stop.utils.StopAppInfo;
-
-import org.evilbinary.tv.widget.BorderView;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.fengjw.tvhelper.stop.StopRunningActivity.TGA;
 
 
 public class StopRunActivity extends AppCompatActivity {
@@ -76,9 +71,6 @@ public class StopRunActivity extends AppCompatActivity {
         setContentView(R.layout.activity_stop_run);
         try {
             init();
-            BorderView border = new BorderView(this);
-            border.setBackgroundResource(R.drawable.border_highlight);
-
             mApplication = getApplication();
             mAdapter = new AppsAdapter(this, mAppInfoList, mApplication);
             mView = (RecyclerView) findViewById(R.id.apps_recyclerview);
@@ -93,7 +85,7 @@ public class StopRunActivity extends AppCompatActivity {
             //mView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
             //mView.addItemDecoration(new DividerGridItemDecoration(this));
             //mView.setHasFixedSize(true);
-            border.attachTo(mView);
+            //border.attachTo(mView);
             mView.setFocusable(false);
             mView.setAdapter(mAdapter);
 //            DefaultItemAnimator animator = new DefaultItemAnimator();

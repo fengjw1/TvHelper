@@ -21,7 +21,6 @@ import com.fengjw.tvhelper.update.DownloadAllActivity;
 import com.fengjw.tvhelper.update.utils.AppInfo;
 import com.fengjw.tvhelper.update.utils.AppInfoProvider;
 
-import org.evilbinary.tv.widget.BorderView;
 
 import java.util.List;
 
@@ -64,10 +63,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 //            e.printStackTrace();
 //        }
 
-        BorderView border = new BorderView(this);
-        border.setBackgroundResource(R.drawable.border_highlight);
         mLayout = (RelativeLayout) findViewById(R.id.main);
-        border.attachTo(mLayout);
 
         for (int i = 0; i < mLayout.getChildCount(); i++) {
             mLayout.getChildAt(i).setOnClickListener(this);

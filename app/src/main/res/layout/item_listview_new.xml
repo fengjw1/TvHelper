@@ -3,6 +3,7 @@
               android:id="@+id/linear_app"
               android:orientation="vertical"
               android:gravity="center"
+              android:background="@drawable/shape_home_type_item"
               android:focusable="true"
               android:focusableInTouchMode="true"
               android:layout_gravity="center"

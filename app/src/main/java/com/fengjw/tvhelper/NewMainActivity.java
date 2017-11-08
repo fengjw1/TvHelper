@@ -17,7 +17,7 @@ import com.fengjw.tvhelper.recenttask.RecentTaskActivity;
  */
 
 public class NewMainActivity extends Activity implements View.OnClickListener {
-    
+
     private RelativeLayout mHomeUpdateRl;
     private RelativeLayout mHomeRecentRl;
     private RelativeLayout mHomeFileRl;
