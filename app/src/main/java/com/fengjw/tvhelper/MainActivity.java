@@ -1,6 +1,7 @@
 package com.fengjw.tvhelper;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -242,7 +243,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
             //intent.setClass(this, DownloadAllActivity.class);
             //startActivity(intent);
             String pkgName = "com.fengjw.apkupdatetool";
-            startApp(pkgName);
+            String className = "com.fengjw.apkupdatetool.DownloadAllActivity";
+            intent.setComponent(new ComponentName(pkgName, className));
+            startActivity(intent);
+            //startApp(pkgName);
         } else if (view == mLayout.getChildAt(1)) {
             intent.setClass(this, RecentTaskActivity.class);
             startActivity(intent);
@@ -263,7 +267,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             //finish();
         } catch (Exception e) {
             e.printStackTrace();
-            Toast.makeText(this, "文件管理未安装！", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "文件管理未安装！", Toast.LENGTH_SHORT).show();
         }
     }
 
