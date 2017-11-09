@@ -52,7 +52,7 @@
                 android:layout_alignParentEnd="true"
                 android:duplicateParentState="true"
                 android:padding="10dp"
-                android:src="@drawable/media_home_video_focus" />
+                android:src="@drawable/home_update" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -82,7 +82,7 @@
                 android:layout_alignParentEnd="true"
                 android:duplicateParentState="true"
                 android:padding="10dp"
-                android:src="@drawable/media_home_udisk_focus" />
+                android:src="@drawable/home_recentlist" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -111,7 +111,7 @@
                 android:layout_height="100dp"
                 android:duplicateParentState="true"
                 android:padding="10dp"
-                android:src="@drawable/media_home_picture_focus"
+                android:src="@drawable/home_file"
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
@@ -144,7 +144,7 @@
                 android:layout_alignParentEnd="true"
                 android:duplicateParentState="true"
                 android:padding="10dp"
-                android:src="@drawable/media_home_music_focus" />
+                android:src="@drawable/home_memory" />
         </RelativeLayout>
 
     </LinearLayout>
