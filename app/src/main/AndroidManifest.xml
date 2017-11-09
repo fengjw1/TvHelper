@@ -42,6 +42,7 @@
         </activity>
 
         <activity android:name=".recenttask.RecentTaskActivity"
+                  android:label="近期任务列表"
                   android:launchMode="singleInstance">
         </activity>
         <activity android:name=".recenttask.utils.AppManagementActivity"/>

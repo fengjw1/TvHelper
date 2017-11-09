@@ -15,5 +15,5 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:clipToPadding="false"
-        tools:listitem="@layout/item_listview_new"/>
+        tools:listitem="@layout/item_listview_new_2"/>
 </LinearLayout>

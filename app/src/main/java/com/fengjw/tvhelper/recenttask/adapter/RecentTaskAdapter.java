@@ -12,6 +12,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.fengjw.tvhelper.R;
 import java.util.HashMap;
@@ -93,6 +94,7 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
 
         private ImageView image;
         private TextView name;
+        private LinearLayout mLinearLayout;
 //        private TextView size;
 //        private TextView cachesize;
 //        private Button btn_stoprun;
@@ -102,6 +104,7 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image_app);
             name = (TextView) itemView.findViewById(R.id.name_app);
+            mLinearLayout = (LinearLayout) itemView.findViewById(R.id.lin_app);
 //            size = (TextView) itemView.findViewById(R.id.size_app);
 //            cachesize = (TextView) itemView.findViewById(R.id.cachesize_app);
 //            btn_stoprun = (Button) itemView.findViewById(R.id.btn_stoprun);
