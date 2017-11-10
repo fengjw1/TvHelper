@@ -2,7 +2,6 @@
     <string name="app_name">TV助手</string>
 
     <!-- service -->
-    <string name="recent_list_name">近期任务列表</string>
     <string name="app_management_toast">当前apk不能打开</string>
     <string name="activity_management_stoprun">停止运行</string>
     <string name="activity_management_open">打开</string>
@@ -14,7 +13,4 @@
     <string name="activity_home_file_manager">文件管理</string>
     <string name="activity_home_memory_manager">内存管理</string>
     <string name="item_listview_name">名字</string>
-    <!--add-->
-    <drawable name="normal">#ff6501</drawable>
-    <drawable name="pressed">#a44100</drawable>
 </resources>

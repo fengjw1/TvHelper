@@ -60,10 +60,11 @@ public class NewMainActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         Intent intent = new Intent();
         String pkgName = null;
+        String className = null;
         switch (view.getId()) {
             case R.id.rl_home_update:
                 pkgName = "com.fengjw.apkupdatetool";
-                String className = "com.fengjw.apkupdatetool.DownloadAllActivity";
+                className = "com.fengjw.apkupdatetool.DownloadAllActivity";
                 intent.setComponent(new ComponentName(pkgName, className));
                 startActivity(intent);
                 break;
@@ -73,11 +74,17 @@ public class NewMainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.rl_home_file:
                 pkgName = "com.ktc.filemanager";
-                startApp(pkgName);
+                className = "com.ktc.filemanager.activity.FirstPageActivity";
+                //startApp(pkgName);
+                intent.setComponent(new ComponentName(pkgName, className));
+                startActivity(intent);
                 break;
             case R.id.rl_home_memory:
                 pkgName = "com.ktc.systemmanager";
-                startApp(pkgName);
+                className = "com.ktc.systemmanager.HomeDialogActivity";
+                //startApp(pkgName);
+                intent.setComponent(new ComponentName(pkgName, className));
+                startActivity(intent);
                 break;
             default:
                 break;

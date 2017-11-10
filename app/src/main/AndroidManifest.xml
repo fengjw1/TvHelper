@@ -42,7 +42,7 @@
         </activity>
 
         <activity android:name=".recenttask.RecentTaskActivity"
-                  android:label="@string/recent_list_name"
+                  android:label="@string/activity_home_recent_list"
                   android:launchMode="singleInstance">
         </activity>
         <activity android:name=".recenttask.utils.AppManagementActivity"/>
