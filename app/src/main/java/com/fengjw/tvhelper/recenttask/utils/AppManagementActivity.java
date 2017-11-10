@@ -237,7 +237,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
 //            finish();
         }catch (Exception e){
             e.printStackTrace();
-            Toast.makeText(this, "当前apk不能打开", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.app_management_toast, Toast.LENGTH_SHORT).show();
         }
     }
 

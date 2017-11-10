@@ -36,7 +36,7 @@
                 android:id="@+id/tv_1_app"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="应用"
+                android:text="@string/activity_management_app"
                 android:textSize="28sp"
                 android:textColor="@color/navajowhite"
                 android:layout_margin="10dp"/>
@@ -47,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="应用名字"
+                android:text="@string/activity_management_appname"
                 android:textColor="@color/white"
                 android:textSize="32sp"/>
             <TextView
@@ -55,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="版本"
+                android:text="@string/activity_management_version"
                 android:textSize="28sp"
                 android:visibility="gone"
                 android:textColor="@color/navajowhite"
@@ -84,7 +84,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="28sp"
-                android:text="打开"
+                android:text="@string/activity_management_open"
                 android:padding="20dp"
                 android:background="@drawable/tv_background_selector"
                 android:textColor="@color/white"/>
@@ -95,7 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/tv_background_selector"
-                android:text="停止运行"
+                android:text="@string/activity_management_stoprun"
                 android:padding="20dp"
                 android:textColor="@color/white"
                 android:textSize="28sp"

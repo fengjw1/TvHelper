@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                android:text="更新应用"
+                android:text="@string/activity_home_update"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                android:text="近期任务列表"
+                android:text="@string/activity_home_recent_list"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
@@ -102,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                android:text="文件管理"
+                android:text="@string/activity_home_file_manager"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="50dp"
-                android:text="内存管理"
+                android:text="@string/activity_home_memory_manager"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
