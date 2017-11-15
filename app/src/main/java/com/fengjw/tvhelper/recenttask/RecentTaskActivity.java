@@ -62,20 +62,13 @@ public class RecentTaskActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recent_task);
         initView();
-        //BorderView border = new BorderView(this);
-        //border.setBackgroundResource(R.drawable.border_highlight);
         reloadButtons(this, appInfos, 16);
         mAdapter = new RecentTaskAdapter(this, appInfos);
-        //mLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 5);
         mRecentTaskRv.setLayoutManager(layoutManager);
-        //border.attachTo(mRecentTaskRv);
         mRecentTaskRv.setFocusable(false);
         mRecentTaskRv.setAdapter(mAdapter);
         //mRecentTaskRv.scrollToPosition(0);
-
-        //mRecentTaskRv.setOnFocusChangeListener(new HomeFocusListener());
-
 
         mAdapter.setOnItemClickListener(new RecentTaskAdapter.OnItemClickListener() {
             @Override
@@ -88,8 +81,6 @@ public class RecentTaskActivity extends AppCompatActivity{
             }
         });
     }
-
-
 
     private void initView() {
         mRecentTaskRv = (RecyclerView) findViewById(R.id.rv_recent_task);

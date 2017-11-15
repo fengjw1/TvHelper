@@ -4,7 +4,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/commen_background"
-                tools:context="com.fengjw.tvhelper.NewMainActivity">
+                tools:context=".NewMainActivity">
 
     <TextView
         android:layout_width="wrap_content"
@@ -34,25 +34,27 @@
             android:id="@+id/rl_home_update"
             android:padding="12dp"
             android:focusable="true"
-            android:background="@drawable/shape_home_type_item">
+            android:background="@drawable/bg_home_activity_all">
+
+            <ImageView
+                android:id="@+id/iv_home_all"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:duplicateParentState="true"
+                android:src="@drawable/home_update" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
+                android:layout_below="@+id/iv_home_all"
+                android:layout_marginTop="40dp"
                 android:text="@string/activity_home_update"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:duplicateParentState="true"
-                android:padding="10dp"
-                android:src="@drawable/home_update" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -65,24 +67,26 @@
             android:layout_marginRight="15dp"
             android:descendantFocusability="beforeDescendants"
             android:focusable="true"
-            android:background="@drawable/shape_home_type_item">
+            android:background="@drawable/bg_home_activity_video">
+
+            <ImageView
+                android:id="@+id/iv_home_video"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:duplicateParentState="true"
+                android:src="@drawable/home_recentlist" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
+                android:layout_below="@+id/iv_home_video"
+                android:layout_marginTop="40dp"
                 android:text="@string/activity_home_recent_list"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:duplicateParentState="true"
-                android:padding="10dp"
-                android:src="@drawable/home_recentlist" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -95,25 +99,27 @@
             android:layout_marginRight="15dp"
             android:descendantFocusability="beforeDescendants"
             android:focusable="true"
-            android:background="@drawable/shape_home_type_item">
+            android:background="@drawable/bg_home_activity_music">
+
+            <ImageView
+                android:id="@+id/iv_home_music"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:duplicateParentState="true"
+                android:src="@drawable/home_file" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
+                android:layout_below="@+id/iv_home_music"
+                android:layout_marginTop="40dp"
                 android:text="@string/activity_home_file_manager"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:duplicateParentState="true"
-                android:padding="10dp"
-                android:src="@drawable/home_file"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -126,25 +132,27 @@
             android:layout_marginRight="15dp"
             android:descendantFocusability="beforeDescendants"
             android:focusable="true"
-            android:background="@drawable/shape_home_type_item">
+            android:background="@drawable/bg_home_activity_picture">
+
+            <ImageView
+                android:id="@+id/iv_home_picture"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:duplicateParentState="true"
+                android:src="@drawable/home_memory" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="50dp"
+                android:layout_below="@+id/iv_home_picture"
+                android:layout_marginTop="40dp"
                 android:text="@string/activity_home_memory_manager"
                 android:textColor="@android:color/white"
                 android:textSize="30sp" />
 
-            <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:duplicateParentState="true"
-                android:padding="10dp"
-                android:src="@drawable/home_memory" />
         </RelativeLayout>
 
     </LinearLayout>

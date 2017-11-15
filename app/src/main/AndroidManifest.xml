@@ -43,9 +43,19 @@
 
         <activity android:name=".recenttask.RecentTaskActivity"
                   android:label="@string/activity_home_recent_list"
-                  android:launchMode="singleInstance">
+                  >
+            <!-- android:launchMode="singleInstance" -->
         </activity>
         <activity android:name=".recenttask.utils.AppManagementActivity"/>
+
+        <receiver android:name=".recenttask.receiver.BootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <category android:name="android.intent.category.HOME"/>
+            </intent-filter>
+
+        </receiver>
+
     </application>
 
 </manifest>

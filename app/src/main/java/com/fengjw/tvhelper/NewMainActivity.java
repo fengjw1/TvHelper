@@ -31,7 +31,7 @@ public class NewMainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_main);
+        setContentView(R.layout.activity_home);
         initView();
     }
 

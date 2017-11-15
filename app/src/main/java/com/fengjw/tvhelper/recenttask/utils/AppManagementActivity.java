@@ -179,7 +179,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
 
                 this.setResult(STOP_RUN);
                 ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-                Log.d("fengjw", "id : " + (int)appInfos.get(position).get("id"));
+                Log.d(TAG, "id : " + (int)appInfos.get(position).get("id"));
                 am.removeTask((int)appInfos.get(position).get("id"));
                 finish();
                 break;
@@ -215,7 +215,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                 }
             }
 
-            Log.d("fengjw", "click");
+            Log.d(TAG, "click");
             if (mIntent != null) {
                 mIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
                 try {
@@ -224,13 +224,13 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                 }
                 catch (ActivityNotFoundException e) {
                     e.printStackTrace();
-                    Log.d("fengjw", "Unable to launch recent task", e);
+                    Log.d(TAG, "Unable to launch recent task", e);
                 }
                 catch (Exception e){
                     e.printStackTrace();
                 }
             }else {
-                Log.d("fengjw", "intent is null!");
+                Log.d(TAG, "intent is null!");
             }
 //            Intent intent = getPackageManager().getLaunchIntentForPackage(appPackageName);
 //            startActivity(intent);

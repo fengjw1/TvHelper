@@ -30,7 +30,6 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
     private OnItemClickListener mOnItemClickListener = null;
     private List<HashMap<String,Object>> mAppInfos;
     private static final String TAG = "RecentTaskAdapter";
-
     public RecentTaskAdapter(Context context, List<HashMap<String,Object>> appInfos){
         super();
         mContext = context;
@@ -64,10 +63,13 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
         singleAppInfo = mAppInfos.get(position);
         holder.image.setImageDrawable((Drawable) singleAppInfo.get("icon"));
         holder.name.setText(singleAppInfo.get("title").toString());
-//        holder.size.setText(singleAppInfo.get("tag").toString());
-//        holder.cachesize.setText(singleAppInfo.get("packageName").toString());
-        holder.itemView.setFocusable(true);
 
+        holder.itemView.setFocusable(true);
+        if (position == 0) {
+            Log.d(TAG, "requestFocus");
+            holder.itemView.requestFocus();
+        }
+        Log.d(TAG, "out !");
         //itemview animation
         holder.itemView.setOnFocusChangeListener(new HomeFocusListener());
         holder.itemView.setTag(position);
@@ -76,6 +78,11 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
     @Override
     public int getItemCount() {
         return mAppInfos.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 
     @Override
