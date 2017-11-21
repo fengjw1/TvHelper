@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+<string name="activity_management_stoprun">หยุดการทำงาน</string>
+<string name="activity_home_file_manager">การจัดการไฟล์</string>
+<string name="app_name">ตัวช่วยการใช้งานทีวี</string>
+<string name="app_management_toast">ไม่สามารถเปิด Apk ที่ใช้งานอยู่ในปัจจุบันได้</string>
+<string name="activity_management_open">ทำการเปิด</string>
+<string name="activity_home_update">อัปเดตแอปพลิเคชัน</string>
+<string name="activity_management_appname">ชื่อแอปพลิเคชัน</string>
+<string name="activity_home_recent_list">รายการงานล่าสุด</string>
+<string name="activity_management_app">แอปพลิเคชัน</string>
+<string name="item_listview_name">ชื่อ</string>
+<string name="activity_home_memory_manager">การจัดการหน่วยความจำ</string>
+</resources>

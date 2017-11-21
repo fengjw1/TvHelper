@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -13,6 +14,7 @@ import android.widget.RelativeLayout;
 import com.fengjw.tvhelper.recenttask.RecentTaskActivity;
 import com.fengjw.tvhelper.recenttask.utils.AppInfo;
 import com.fengjw.tvhelper.recenttask.utils.AppInfoProvider;
+import com.fengjw.tvhelper.recenttask.utils.ScrollTextView;
 
 import java.util.List;
 
@@ -25,8 +27,15 @@ public class NewMainActivity extends Activity implements View.OnClickListener {
     private RelativeLayout mHomeUpdateRl;
     private RelativeLayout mHomeRecentRl;
     private RelativeLayout mHomeFileRl;
-    private HomeFocusListener mFocusListener;
+    private HomeFocusListener mFocusListenerUpdate;
+    private HomeFocusListener mFocusListenerRecent;
+    private HomeFocusListener mFocusListenerFile;
+    private HomeFocusListener mFocusListenerMemory;
     private RelativeLayout mHomeMemoryRl;
+    private ScrollTextView mHomeUpdateTv;
+    private ScrollTextView mHomeRecentTv;
+    private ScrollTextView mHomeFileTv;
+    private ScrollTextView mHomeMemoryTv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,21 +49,32 @@ public class NewMainActivity extends Activity implements View.OnClickListener {
         mHomeRecentRl = (RelativeLayout) findViewById(R.id.rl_home_recent);
         mHomeFileRl = (RelativeLayout) findViewById(R.id.rl_home_file);
         mHomeMemoryRl = (RelativeLayout) findViewById(R.id.rl_home_memory);
+        mHomeUpdateTv = (ScrollTextView) findViewById(R.id.tv_home_update);
+        mHomeRecentTv = (ScrollTextView) findViewById(R.id.tv_home_recent);
+        mHomeFileTv = (ScrollTextView) findViewById(R.id.tv_home_file);
+        mHomeMemoryTv = (ScrollTextView) findViewById(R.id.tv_home_memory);
+
+        showItem();
+
+        String tvUpdateName = mHomeUpdateTv.getText().toString();
+        String tvRecentName = mHomeRecentTv.getText().toString();
+        String tvFileName = mHomeFileTv.getText().toString();
+        String tvMemoryName = mHomeMemoryTv.getText().toString();
+
+        mFocusListenerUpdate = new HomeFocusListener(mHomeUpdateTv, tvUpdateName);
+        mFocusListenerRecent = new HomeFocusListener(mHomeRecentTv, tvRecentName);
+        mFocusListenerFile = new HomeFocusListener(mHomeFileTv, tvFileName);
+        mFocusListenerMemory = new HomeFocusListener(mHomeMemoryTv, tvMemoryName);
 
         mHomeUpdateRl.setOnClickListener(this);
         mHomeRecentRl.setOnClickListener(this);
         mHomeFileRl.setOnClickListener(this);
         mHomeMemoryRl.setOnClickListener(this);
-
-        showItem();
-
-        mFocusListener = new HomeFocusListener();
-        mHomeUpdateRl.setOnFocusChangeListener(mFocusListener);
-        mHomeRecentRl.setOnFocusChangeListener(mFocusListener);
-        mHomeFileRl.setOnFocusChangeListener(mFocusListener);
-        mHomeMemoryRl.setOnFocusChangeListener(mFocusListener);
+        mHomeUpdateRl.setOnFocusChangeListener(mFocusListenerUpdate);
+        mHomeRecentRl.setOnFocusChangeListener(mFocusListenerRecent);
+        mHomeFileRl.setOnFocusChangeListener(mFocusListenerFile);
+        mHomeMemoryRl.setOnFocusChangeListener(mFocusListenerMemory);
     }
-
 
     @Override
     public void onClick(View view) {
@@ -63,6 +83,7 @@ public class NewMainActivity extends Activity implements View.OnClickListener {
         String className = null;
         switch (view.getId()) {
             case R.id.rl_home_update:
+                //mHomeUpdateTv.requestFocus();
                 pkgName = "com.fengjw.apkupdatetool";
                 className = "com.fengjw.apkupdatetool.DownloadAllActivity";
                 intent.setComponent(new ComponentName(pkgName, className));
@@ -94,11 +115,23 @@ public class NewMainActivity extends Activity implements View.OnClickListener {
 
     class HomeFocusListener implements View.OnFocusChangeListener {
 
+        private ScrollTextView mTextView;
+        private String mName;
+
+        public HomeFocusListener(ScrollTextView view, String name) {
+            mTextView = view;
+            mName = name;
+        }
+
         @Override
         public void onFocusChange(View view, boolean b) {
             if (b) {
+                mTextView.setText(mName);
+                mTextView.setCanFocused(true);
                 zoomOutWindow(view);
             } else {
+                mTextView.setText(mName);
+                mTextView.setCanFocused(false);
                 zoomInWindow(view);
             }
         }
@@ -127,52 +160,40 @@ public class NewMainActivity extends Activity implements View.OnClickListener {
         view.startAnimation(animationSet);
     }
 
-
-    public void startApp(String appPackageName) {
-        try {
-            Intent intent = getPackageManager().getLaunchIntentForPackage(appPackageName);
-            startActivity(intent);
-            //finish();
-        } catch (Exception e) {
-            e.printStackTrace();
-            //Toast.makeText(this, "文件管理未安装！", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void showItem(){
+    private void showItem() {
         int RESULT_UPDATE = 0;
         int RESULT_FILE = 0;
         int RESULT_MEMORY = 0;
         AppInfoProvider appInfoProvider = new AppInfoProvider(this);
         List<AppInfo> appInfoList = appInfoProvider.getAllApps();
-        for (AppInfo appInfo : appInfoList){
-            if (appInfo.getPkg_name().equals("com.ktc.filemanager")){
+        for (AppInfo appInfo : appInfoList) {
+            if (appInfo.getPkg_name().equals("com.ktc.filemanager")) {
                 RESULT_FILE = 1;
                 break;
             }
         }
 
-        for (AppInfo appInfo : appInfoList){
-            if (appInfo.getPkg_name().equals("com.fengjw.apkupdatetool")){
+        for (AppInfo appInfo : appInfoList) {
+            if (appInfo.getPkg_name().equals("com.fengjw.apkupdatetool")) {
                 RESULT_UPDATE = 1;
                 break;
             }
         }
 
-        for (AppInfo appInfo : appInfoList){
-            if (appInfo.getPkg_name().equals("com.ktc.systemmanager")){
+        for (AppInfo appInfo : appInfoList) {
+            if (appInfo.getPkg_name().equals("com.ktc.systemmanager")) {
                 RESULT_MEMORY = 1;
                 break;
             }
         }
 
-        if (RESULT_UPDATE == 0){
+        if (RESULT_UPDATE == 0) {
             mHomeUpdateRl.setVisibility(View.GONE);
         }
-        if (RESULT_FILE == 0){
+        if (RESULT_FILE == 0) {
             mHomeFileRl.setVisibility(View.GONE);
         }
-        if (RESULT_MEMORY == 0){
+        if (RESULT_MEMORY == 0) {
             mHomeMemoryRl.setVisibility(View.GONE);
         }
     }

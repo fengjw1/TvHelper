@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+<string name="activity_management_stoprun">Arrêter</string>
+<string name="activity_home_file_manager">Gestion des fichiers</string>
+<string name="app_name">Assistant TV</string>
+<string name="app_management_toast">Impossible d\'ouvrir l\'apk actuelle</string>
+<string name="activity_management_open">Activer</string>
+<string name="activity_home_update">Mettre à jour l\'application</string>
+<string name="activity_management_appname">Nom d\'application</string>
+<string name="activity_home_recent_list">Liste des tâches récentes</string>
+<string name="activity_management_app">APPLICATION</string>
+<string name="item_listview_name">Nom</string>
+<string name="activity_home_memory_manager">Gestion de la mémoire</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+<string name="activity_management_stoprun">Остановить запущенные</string>
+<string name="activity_home_file_manager">Управление файлами</string>
+<string name="app_name">ТВ-помощник</string>
+<string name="app_management_toast">Не удается открыть текущий Apk-файл</string>
+<string name="activity_management_open">Включить</string>
+<string name="activity_home_update">Обновить приложение</string>
+<string name="activity_management_appname">Имя приложения</string>
+<string name="activity_home_recent_list">Недавние задачи</string>
+<string name="activity_management_app">приложение</string>
+<string name="item_listview_name">Имя</string>
+<string name="activity_home_memory_manager">Управление памятью</string>
+</resources>

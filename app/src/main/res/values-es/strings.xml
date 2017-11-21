@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+<string name="activity_management_stoprun">Detener ejecución</string>
+<string name="activity_home_file_manager">Gestor de archivos</string>
+<string name="app_name">Asistente del TV</string>
+<string name="app_management_toast">Error al abrir la Apk actual</string>
+<string name="activity_management_open">"Activar"</string>
+<string name="activity_home_update">Actualizar aplicación</string>
+<string name="activity_management_appname">Nombre de la aplicación</string>
+<string name="activity_home_recent_list">Lista de tareas recientes</string>
+<string name="activity_management_app">aplicación</string>
+<string name="item_listview_name">Nombre</string>
+<string name="activity_home_memory_manager">Gestor de memoria</string>
+</resources>

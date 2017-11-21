@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+<string name="activity_management_stoprun">توقف اجرا</string>
+<string name="activity_home_file_manager">مدیریت فایل</string>
+<string name="app_name">دستیار تلویزیون</string>
+<string name="app_management_toast">Apk جاری باز نمی‌شود</string>
+<string name="activity_management_open">روشن کردن</string>
+<string name="activity_home_update">به‌روز رسانی برنامه</string>
+<string name="activity_management_appname">نام برنامه</string>
+<string name="activity_home_recent_list">فهرست کارهای اخیر</string>
+<string name="activity_management_app">برنامه</string>
+<string name="item_listview_name">نام</string>
+<string name="activity_home_memory_manager">مدیریت حافظه</string>
+</resources>

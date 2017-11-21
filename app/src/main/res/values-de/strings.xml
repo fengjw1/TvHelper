@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+<string name="activity_management_stoprun">Ablauf beenden</string>
+<string name="activity_home_file_manager">Dateimanagement</string>
+<string name="app_name">TV-Assistent</string>
+<string name="app_management_toast">Aktuelle App kann nicht geöffnet werden</string>
+<string name="activity_management_open">Einschalten</string>
+<string name="activity_home_update">App aktualisieren</string>
+<string name="activity_management_appname">App-Name</string>
+<string name="activity_home_recent_list">Letzte Aufgabenliste</string>
+<string name="activity_management_app">anwendung</string>
+<string name="item_listview_name">Name</string>
+<string name="activity_home_memory_manager">Speichermanagement</string>
+</resources>

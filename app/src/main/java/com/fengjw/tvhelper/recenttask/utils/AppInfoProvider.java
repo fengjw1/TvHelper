@@ -27,13 +27,11 @@ public class AppInfoProvider {
         List<AppInfo> list = new ArrayList<>();
         AppInfo myAppInfo;
 
-        //
         List<PackageInfo> packageInfos = packageManager
                 .getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES);
         for (PackageInfo info : packageInfos){
             myAppInfo = new AppInfo();
 
-            //
             String packageName = info.packageName;
 
             ApplicationInfo appInfo = info.applicationInfo;

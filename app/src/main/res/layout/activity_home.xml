@@ -30,10 +30,11 @@
             android:layout_height="300dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:descendantFocusability="beforeDescendants"
             android:id="@+id/rl_home_update"
             android:padding="12dp"
             android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
             android:background="@drawable/bg_home_activity_all">
 
             <ImageView
@@ -42,31 +43,39 @@
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:duplicateParentState="true"
                 android:src="@drawable/home_update" />
 
-            <TextView
+            <com.fengjw.tvhelper.recenttask.utils.ScrollTextView
+                android:id="@+id/tv_home_update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/iv_home_all"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
                 android:text="@string/activity_home_update"
                 android:textColor="@android:color/white"
-                android:textSize="30sp" />
+                android:gravity="center_horizontal"
+                android:textSize="22sp" />
 
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="50dp"
             android:id="@+id/rl_home_recent"
             android:layout_width="200dp"
             android:layout_height="300dp"
+            android:layout_marginBottom="50dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:descendantFocusability="beforeDescendants"
+            android:layout_marginTop="50dp"
             android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
             android:background="@drawable/bg_home_activity_video">
 
             <ImageView
@@ -75,17 +84,25 @@
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:duplicateParentState="true"
-                android:src="@drawable/home_recentlist" />
-            <TextView
+                android:src="@drawable/home_recentlist"/>
+
+            <com.fengjw.tvhelper.recenttask.utils.ScrollTextView
+                android:id="@+id/tv_home_recent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_below="@+id/iv_home_video"
-                android:layout_marginTop="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+                android:ellipsize="marquee"
+                android:gravity="center_horizontal"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
                 android:text="@string/activity_home_recent_list"
                 android:textColor="@android:color/white"
-                android:textSize="30sp" />
+                android:textSize="22sp"/>
 
         </RelativeLayout>
 
@@ -97,8 +114,9 @@
             android:layout_height="300dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:descendantFocusability="beforeDescendants"
             android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
             android:background="@drawable/bg_home_activity_music">
 
             <ImageView
@@ -107,18 +125,25 @@
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:duplicateParentState="true"
                 android:src="@drawable/home_file" />
 
-            <TextView
+            <com.fengjw.tvhelper.recenttask.utils.ScrollTextView
+                android:id="@+id/tv_home_file"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_below="@+id/iv_home_music"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
                 android:text="@string/activity_home_file_manager"
                 android:textColor="@android:color/white"
-                android:textSize="30sp" />
+                android:gravity="center_horizontal"
+                android:textSize="22sp" />
 
         </RelativeLayout>
 
@@ -130,8 +155,9 @@
             android:layout_height="300dp"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:descendantFocusability="beforeDescendants"
             android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
             android:background="@drawable/bg_home_activity_picture">
 
             <ImageView
@@ -140,18 +166,26 @@
                 android:layout_height="100dp"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:duplicateParentState="true"
                 android:src="@drawable/home_memory" />
 
-            <TextView
+            <com.fengjw.tvhelper.recenttask.utils.ScrollTextView
+                android:id="@+id/tv_home_memory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/iv_home_picture"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="23dp"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:singleLine="true"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
                 android:text="@string/activity_home_memory_manager"
                 android:textColor="@android:color/white"
-                android:textSize="30sp" />
+                android:gravity="center_horizontal"
+                android:textSize="22sp"
+                android:layout_below="@+id/iv_home_picture"
+                android:layout_centerHorizontal="true">
+            </com.fengjw.tvhelper.recenttask.utils.ScrollTextView>
 
         </RelativeLayout>
 

@@ -34,12 +34,18 @@
         android:layout_gravity="center"
         android:layout_marginTop="16dp" />
 
-    <TextView
+    <com.fengjw.tvhelper.recenttask.utils.ScrollTextView
         android:id="@+id/name_app"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:ellipsize="marquee"
+        android:marqueeRepeatLimit="marquee_forever"
+        android:singleLine="true"
         android:text="@string/item_listview_name"
         android:textColor="@android:color/white"
         android:textSize="22sp" />

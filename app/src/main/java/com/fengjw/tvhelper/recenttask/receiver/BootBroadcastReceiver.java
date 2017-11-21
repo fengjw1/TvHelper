@@ -4,7 +4,6 @@ import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.List;
 
@@ -31,7 +30,6 @@ public class BootBroadcastReceiver extends BroadcastReceiver{
         for (int i = 0; i < recentTasks.size(); i ++){
             am.removeTask(recentTasks.get(i).persistentId);
         }
-        Log.d(TAG, "recentTasks size : " + recentTasks.size());
     }
 
 }

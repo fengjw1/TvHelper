@@ -14,24 +14,19 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
+
 import com.fengjw.tvhelper.R;
 import com.fengjw.tvhelper.recenttask.adapter.RecentTaskAdapter;
-import com.fengjw.tvhelper.recenttask.utils.AppManagementActivity;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class RecentTaskActivity extends AppCompatActivity{
 
-    private static final String TAG = "RecentTaskActivity";
-    private static List<ActivityManager.RecentTaskInfo> list;
-    private static ActivityManager am;
-    private static String apps = "";
-    private StaggeredGridLayoutManager mLayoutManager;
-    private List<ActivityManager.AppTask> appTasks;
+    private final String TAG = getClass().getSimpleName();
     private Intent intent;
     private int resultPosition;
     private static final int STOP_RUN = 1;
@@ -48,7 +43,6 @@ public class RecentTaskActivity extends AppCompatActivity{
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case REFRESH_UI:
-                    Log.d(TAG, "handle");
                     mAdapter.updateData(resultPosition);
                     break;
                 default:
@@ -68,7 +62,6 @@ public class RecentTaskActivity extends AppCompatActivity{
         mRecentTaskRv.setLayoutManager(layoutManager);
         mRecentTaskRv.setFocusable(false);
         mRecentTaskRv.setAdapter(mAdapter);
-        //mRecentTaskRv.scrollToPosition(0);
 
         mAdapter.setOnItemClickListener(new RecentTaskAdapter.OnItemClickListener() {
             @Override
@@ -98,13 +91,9 @@ public class RecentTaskActivity extends AppCompatActivity{
 
         switch (resultCode){
             case STOP_RUN:
-                Log.d(TAG, "STOP_RUN");
-                //appInfos.remove(resultPosition);
-               // mAdapter = new RecentTaskAdapter(this, appInfos);
                 mHandler.sendEmptyMessage(REFRESH_UI);
                 break;
             case CONTINUE_RUN:
-                Log.d(TAG, "CONTINUE_RUN");
                 break;
             default:
                 break;
@@ -137,7 +126,6 @@ public class RecentTaskActivity extends AppCompatActivity{
         final List<ActivityManager.RecentTaskInfo> recentTasks = am
                 .getRecentTasks(MAX_RECENT_TASKS + 1, 0x0002);
                 //.getRecentTasks(MAX_RECENT_TASKS + 1, 8);
-
 
         // 这个activity的信息是我们的launcher
         ActivityInfo homeInfo = new Intent(Intent.ACTION_MAIN).addCategory(

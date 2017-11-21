@@ -4,25 +4,12 @@
           android:sharedUserId="android.uid.system">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <!-- add -->
-    <uses-permission android:name="android.permission.INSTALL_PACKAGES"/>
-    <uses-permission android:name="android.permission.DELETE_PACKAGES"/>
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-    <uses-permission android:name="android.permission.RESTART_PACKAGES"/>
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"/>
 
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.REMOVE_TASKS"/>
     <uses-permission android:name="android.permission.REORDER_TASKS"/>
-
-    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"/>
-    <uses-permission android:name="android.permission.FORCE_STOP_PACKAGES"/>
 
     <!-- android:name=".update.utils.GApp" -->
 
@@ -46,16 +33,14 @@
                   >
             <!-- android:launchMode="singleInstance" -->
         </activity>
-        <activity android:name=".recenttask.utils.AppManagementActivity"/>
+        <activity android:name=".recenttask.AppManagementActivity"/>
 
         <receiver android:name=".recenttask.receiver.BootBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <category android:name="android.intent.category.HOME"/>
             </intent-filter>
-
         </receiver>
-
     </application>
 
 </manifest>

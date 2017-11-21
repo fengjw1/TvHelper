@@ -1,4 +1,4 @@
-package com.fengjw.tvhelper.recenttask.utils;
+package com.fengjw.tvhelper.recenttask;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -28,8 +28,7 @@ import java.util.List;
 
 public class AppManagementActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "AppManagementActivity";
-
+    private final String TAG = getClass().getSimpleName();
     private ImageView mAppImage;
     private TextView m1AppTv;
     private TextView mNameApp;
@@ -42,8 +41,6 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
     private static final int STOP_RUN = 1;
     private static final int CONTINUE_RUN = 2;
 
-
-    //
     private Intent mIntent;
     private List<HashMap<String, Object>> appInfos = new ArrayList<HashMap<String, Object>>();
 
@@ -53,10 +50,8 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_management_app);
         packageName = getIntent().getStringExtra("packageName");
         position = getIntent().getIntExtra("position", 0);
-        Log.d(TAG, "packageName : " + packageName);
         reloadButtons(this, appInfos, 16);
         initView();
-        //init();
         bindView();
     }
 
@@ -78,12 +73,6 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         // 但是这是一个隐藏域，因此我把它的值直接拷贝到这里
         final List<ActivityManager.RecentTaskInfo> recentTasks = am
                 .getRecentTasks(MAX_RECENT_TASKS + 1, 0x0002);
-
-//        final List<ActivityManager.RunningTaskInfo> recentTaskInfos = am.getRunningTasks(20);
-//        Log.d("fengjw", "size : " + recentTaskInfos.size());
-//        for (int i = 0; i < recentTaskInfos.size(); i ++){
-//            Log.d("fengjw", recentTaskInfos.get(i).baseActivity.toString());
-//        }
 
         // 这个activity的信息是我们的launcher
         ActivityInfo homeInfo = new Intent(Intent.ACTION_MAIN).addCategory(
@@ -133,7 +122,6 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         MAX_RECENT_TASKS = repeatCount;
     }
 
-
     private void bindView(){
         mAppImage.setImageDrawable((Drawable) appInfos.get(position).get("icon"));
         mNameApp.setText(appInfos.get(position).get("title").toString());
@@ -150,8 +138,6 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         mOpenApp.setOnClickListener(this);
         mStopAppTv = (TextView) findViewById(R.id.tv_stop_app);
         mStopAppTv.setOnClickListener(this);
-
-        //bindView();
     }
 
     @Override
@@ -162,26 +148,14 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                 startApp(packageName);
                 break;
             case R.id.tv_stop_app:
-//                toast("已停止运行" + mAppInfo.getName());
-//                if (mForceStopManager.canForceStop()){
-////                        onForceStopOk();
-////                        //Log.d(TGA, "getItemId : " + getItemId(position));
-////                        //Log.d(TGA, "getItemViewType : " + getItemViewType(position));
-////                        //removeData(position);
-////                        Log.d(TGA, "delete");
-////                    //Intent intent = new Intent(this, StopRunActivity.class);
-////                    //intent.putExtra("position", position);
-////                    this.setResult(STOP_RUN);
-//                    finish();
-//                    }else {
-//                        Log.d(TGA, "no delete");
-//                    }
-
-                this.setResult(STOP_RUN);
-                ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-                Log.d(TAG, "id : " + (int)appInfos.get(position).get("id"));
-                am.removeTask((int)appInfos.get(position).get("id"));
-                finish();
+                try {
+                    this.setResult(STOP_RUN);
+                    ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                    am.removeTask((int)appInfos.get(position).get("id"));
+                    finish();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
                 break;
             default:
                 break;
@@ -205,17 +179,14 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
     }
 
-    //
     public void startApp(String appPackageName){
         try {
-
             for (int i = 0; i < appInfos.size(); i ++){
                 if (appPackageName.equals(appInfos.get(i).get("packageName"))){
                     mIntent = (Intent) appInfos.get(i).get("tag");
                 }
             }
 
-            Log.d(TAG, "click");
             if (mIntent != null) {
                 mIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
                 try {
@@ -224,17 +195,13 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
                 }
                 catch (ActivityNotFoundException e) {
                     e.printStackTrace();
-                    Log.d(TAG, "Unable to launch recent task", e);
                 }
                 catch (Exception e){
                     e.printStackTrace();
                 }
             }else {
-                Log.d(TAG, "intent is null!");
+                return;
             }
-//            Intent intent = getPackageManager().getLaunchIntentForPackage(appPackageName);
-//            startActivity(intent);
-//            finish();
         }catch (Exception e){
             e.printStackTrace();
             Toast.makeText(this, R.string.app_management_toast, Toast.LENGTH_SHORT).show();

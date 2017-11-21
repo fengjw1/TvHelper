@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.fengjw.tvhelper.R;
+import com.fengjw.tvhelper.recenttask.utils.ScrollTextView;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
     private HashMap<String, Object> singleAppInfo;
     private OnItemClickListener mOnItemClickListener = null;
     private List<HashMap<String,Object>> mAppInfos;
-    private static final String TAG = "RecentTaskAdapter";
+    private final String TAG = getClass().getSimpleName();
     public RecentTaskAdapter(Context context, List<HashMap<String,Object>> appInfos){
         super();
         mContext = context;
@@ -44,9 +46,6 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = mInflater.inflate(R.layout.item_listview_new_2, parent, false);
-        Log.d(TAG, "onCreateViewHolder");
-//        Intent singleIntent = (Intent) singleAppInfo.get("tag");
-//        view.setTag(singleIntent);
         ViewHolder viewHolder = new ViewHolder(view);
         view.setOnClickListener(this);
         return viewHolder;
@@ -59,19 +58,19 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Log.d(TAG, "positon = " + position);
         singleAppInfo = mAppInfos.get(position);
         holder.image.setImageDrawable((Drawable) singleAppInfo.get("icon"));
         holder.name.setText(singleAppInfo.get("title").toString());
-
         holder.itemView.setFocusable(true);
         if (position == 0) {
-            Log.d(TAG, "requestFocus");
             holder.itemView.requestFocus();
+            holder.name.setText(singleAppInfo.get("title").toString());
+            holder.name.setCanFocused(true);
         }
-        Log.d(TAG, "out !");
+
         //itemview animation
-        holder.itemView.setOnFocusChangeListener(new HomeFocusListener());
+        holder.itemView.setOnFocusChangeListener(new HomeFocusListener(holder.name,
+                singleAppInfo.get("title").toString()));
         holder.itemView.setTag(position);
     }
 
@@ -100,40 +99,42 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private ImageView image;
-        private TextView name;
+        private ScrollTextView name;
         private LinearLayout mLinearLayout;
-//        private TextView size;
-//        private TextView cachesize;
-//        private Button btn_stoprun;
-//        private LinearLayout mLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
             image = (ImageView) itemView.findViewById(R.id.image_app);
-            name = (TextView) itemView.findViewById(R.id.name_app);
+            name = (ScrollTextView) itemView.findViewById(R.id.name_app);
             mLinearLayout = (LinearLayout) itemView.findViewById(R.id.lin_app);
-//            size = (TextView) itemView.findViewById(R.id.size_app);
-//            cachesize = (TextView) itemView.findViewById(R.id.cachesize_app);
-//            btn_stoprun = (Button) itemView.findViewById(R.id.btn_stoprun);
-//            mLayout = (LinearLayout) itemView.findViewById(R.id.linear_app);
             Log.d(TAG, "ViewHolder!");
         }
     }
 
-
     class HomeFocusListener implements View.OnFocusChangeListener {
+
+        private ScrollTextView mTextView;
+        private String mName;
+
+        public HomeFocusListener(ScrollTextView textView, String name){
+            mTextView = textView;
+            mName = name;
+        }
 
         @Override
         public void onFocusChange(View view, boolean b) {
+
             if (b) {
-                //zoomOutWindow(view);
+                mTextView.setText(mName);
+                mTextView.setCanFocused(true);
                 ViewCompat.animate(view)
                         .setDuration(200)
                         .scaleX(1.3f)
                         .scaleY(1.3f)
                         .start();
             }else {
-                //zoomInWindow(view);
+                mTextView.setText(mName);
+                mTextView.setCanFocused(false);
                 ViewCompat.animate(view)
                         .setDuration(200)
                         .scaleX(1f)
@@ -142,28 +143,4 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
             }
         }
     }
-
-//    private void zoomOutWindow(View view) {
-//        AnimationSet animationSet = new AnimationSet(true);
-//        ScaleAnimation animation = new ScaleAnimation(1.0f, 1.3f, 1.0f, 1.3f,
-//                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-//        animation.setDuration(500);
-//        animation.setFillAfter(true);
-//        animationSet.addAnimation(animation);
-//        animationSet.setFillAfter(true);
-//        view.clearAnimation();
-//        view.startAnimation(animationSet);
-//    }
-//
-//    private void zoomInWindow(View view) {
-//        AnimationSet animationSet = new AnimationSet(true);
-//        ScaleAnimation animation = new ScaleAnimation(1.1f, 1.0f, 1.1f, 1.0f,
-//                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-//        animation.setDuration(500);
-//        animation.setFillAfter(true);
-//        animationSet.addAnimation(animation);
-//        animationSet.setFillAfter(true);
-//        view.startAnimation(animationSet);
-//    }
-
 }

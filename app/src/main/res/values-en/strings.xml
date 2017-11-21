@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+<string name="activity_management_stoprun">Stop Running</string>
+<string name="activity_home_file_manager">File Management</string>
+<string name="app_name">TV Assistant</string>
+<string name="app_management_toast">Current Apk Fails to Be Opened</string>
+<string name="activity_management_open">Turn On</string>
+<string name="activity_home_update">Update Application</string>
+<string name="activity_management_appname">Application Name</string>
+<string name="activity_home_recent_list">Recent Task List</string>
+<string name="activity_management_app">Application</string>
+<string name="item_listview_name">Name</string>
+<string name="activity_home_memory_manager">Memory Management</string>
+</resources>
