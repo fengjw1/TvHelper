@@ -39,8 +39,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
                 <category android:name="android.intent.category.HOME"/>
+                <!--<action android:name="android.intent.action.ACTION_SHUTDOWN" />-->
+
+                <!--<category android:name="android.intent.category.HOME" />-->
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

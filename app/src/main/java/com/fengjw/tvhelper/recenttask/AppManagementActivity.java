@@ -40,6 +40,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
     private int position;
     private static final int STOP_RUN = 1;
     private static final int CONTINUE_RUN = 2;
+    private static final int Update_UI = 4;
 
     private Intent mIntent;
     private List<HashMap<String, Object>> appInfos = new ArrayList<HashMap<String, Object>>();
@@ -145,6 +146,8 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()) {
             case R.id.tv_open_app:
                 //toast("open");
+                this.setResult(Update_UI);
+                Log.d("fengjw", "Update_UI");
                 startApp(packageName);
                 break;
             case R.id.tv_stop_app:
@@ -188,7 +191,7 @@ public class AppManagementActivity extends AppCompatActivity implements View.OnC
             }
 
             if (mIntent != null) {
-                mIntent.addFlags(Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY);
+                mIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 try {
                     startActivity(mIntent);
                     finish();

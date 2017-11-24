@@ -41,6 +41,7 @@ public class NewMainActivity extends Activity implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Log.d("fengjw", "old NewMainActivity");
         initView();
     }
 

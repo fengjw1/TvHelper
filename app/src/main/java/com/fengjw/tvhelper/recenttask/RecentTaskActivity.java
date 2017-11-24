@@ -32,6 +32,9 @@ public class RecentTaskActivity extends AppCompatActivity{
     private static final int STOP_RUN = 1;
     private static final int CONTINUE_RUN = 2;
     private static final int REFRESH_UI = 3;
+    private static final int Update_UI = 4;
+
+    private static final int MAX_RECENT_TASKS = 16;
 
     //用来存放每一个 recentApplication 的信息，我们这里存放应用程序名，应用程序图标和intent。
     private List<HashMap<String, Object>> appInfos = new ArrayList<HashMap<String, Object>>();
@@ -44,6 +47,10 @@ public class RecentTaskActivity extends AppCompatActivity{
             switch (msg.what){
                 case REFRESH_UI:
                     mAdapter.updateData(resultPosition);
+                    break;
+                case Update_UI:
+                    mAdapter.updateUI(appInfos);
+                    Log.d("fengjw", "update UI");
                     break;
                 default:
                     break;
@@ -73,6 +80,8 @@ public class RecentTaskActivity extends AppCompatActivity{
                 startActivityForResult(intent, 1);
             }
         });
+
+        //clearRecentList(this);
     }
 
     private void initView() {
@@ -92,6 +101,10 @@ public class RecentTaskActivity extends AppCompatActivity{
         switch (resultCode){
             case STOP_RUN:
                 mHandler.sendEmptyMessage(REFRESH_UI);
+                break;
+            case Update_UI:
+                reloadButtons(this, appInfos, 16);
+                mHandler.sendEmptyMessage(Update_UI);
                 break;
             case CONTINUE_RUN:
                 break;
@@ -126,6 +139,7 @@ public class RecentTaskActivity extends AppCompatActivity{
         final List<ActivityManager.RecentTaskInfo> recentTasks = am
                 .getRecentTasks(MAX_RECENT_TASKS + 1, 0x0002);
                 //.getRecentTasks(MAX_RECENT_TASKS + 1, 8);
+
 
         // 这个activity的信息是我们的launcher
         ActivityInfo homeInfo = new Intent(Intent.ACTION_MAIN).addCategory(
@@ -176,6 +190,43 @@ public class RecentTaskActivity extends AppCompatActivity{
         MAX_RECENT_TASKS = repeatCount;
     }
 
+    private void clearRecentList(Context context){
+        final ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        final List<ActivityManager.RecentTaskInfo> recentTasks = am
+                .getRecentTasks(MAX_RECENT_TASKS + 1, 0x0002);
+        final PackageManager pm = context.getPackageManager();
 
+        int numTasks = recentTasks.size();
+        for (int i = 1; i < numTasks && (i < MAX_RECENT_TASKS); i++) {
+            HashMap<String, Object> singleAppInfo = new HashMap<String, Object>();// 当个启动过的应用程序的信息
+            final ActivityManager.RecentTaskInfo info = recentTasks.get(i);
+
+            Intent intent = new Intent(info.baseIntent);
+            if (info.origActivity != null) {
+                intent.setComponent(info.origActivity);
+            }
+            intent.setFlags((intent.getFlags() & ~Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            // 获取指定应用程序activity的信息(按我的理解是：某一个应用程序的最后一个在前台出现过的activity。)
+            final ResolveInfo resolveInfo = pm.resolveActivity(intent, 0);
+            if (resolveInfo != null) {
+                final ActivityInfo activityInfo = resolveInfo.activityInfo;
+                if (activityInfo.packageName.equals("com.ktc.launcher") ||
+                        activityInfo.packageName.equals("com.fengjw.apkupdatetool") ||
+                        activityInfo.packageName.equals("com.fengjw.tvhelper") ||
+                        activityInfo.packageName.equals("com.mstar.tv.tvplayer.ui")){
+                    Log.d("fengjw", "no remove : " + activityInfo.packageName);
+                }else {
+                    //am.removeTask(recentTasks.get(i).persistentId);
+                    Log.d("fengjw", "remove : " + activityInfo.packageName);
+                }
+
+            }
+
+        }
+
+
+
+    }
 
 }

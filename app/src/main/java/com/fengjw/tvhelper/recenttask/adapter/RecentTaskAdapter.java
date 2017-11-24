@@ -56,6 +56,12 @@ public class RecentTaskAdapter extends RecyclerView.Adapter<RecentTaskAdapter.Vi
         notifyDataSetChanged();
     }
 
+    public void updateUI(List<HashMap<String, Object>> appInfos){
+        this.mAppInfos = appInfos;
+        notifyDataSetChanged();
+        Log.d("fengjw", "notifyDataSetChanged()");
+    }
+
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         singleAppInfo = mAppInfos.get(position);
