@@ -15,7 +15,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/tvlunch"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -38,7 +38,7 @@
         <receiver android:name=".recenttask.receiver.BootBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
-                <category android:name="android.intent.category.HOME"/>
+                <!--<category android:name="android.intent.category.HOME"/>-->
                 <!--<action android:name="android.intent.action.ACTION_SHUTDOWN" />-->
 
                 <!--<category android:name="android.intent.category.HOME" />-->

@@ -26,6 +26,7 @@ public class BootBroadcastReceiver extends BroadcastReceiver{
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(ACTION_BOOT)) {
+            Log.d("fengjw", "ACTION_BOOT");
             clearRecentList(context);
         }
     }
